@@ -33,11 +33,11 @@ public class Initial  {
 
         List<RouterModel> routerList = new ArrayList<RouterModel>();
         RouterModel routerModelA = new RouterModel(router_A,"Router A");
-        RouterModel routerModelB = new RouterModel(router_A,"Router B");
-        RouterModel routerModelC = new RouterModel(router_A,"Router C");
-        RouterModel routerModelD = new RouterModel(router_A,"Router D");
-        RouterModel routerModelE = new RouterModel(router_A,"Router E");
-        RouterModel routerModelF = new RouterModel(router_A,"Router F");
+        RouterModel routerModelB = new RouterModel(router_B,"Router B");
+        RouterModel routerModelC = new RouterModel(router_C,"Router C");
+        RouterModel routerModelD = new RouterModel(router_D,"Router D");
+        RouterModel routerModelE = new RouterModel(router_E,"Router E");
+        RouterModel routerModelF = new RouterModel(router_F,"Router F");
 
         routerList.add(routerModelA);
         routerList.add(routerModelB);
@@ -47,26 +47,6 @@ public class Initial  {
         routerList.add(routerModelF);
 
         routingTable.printRouterList((routerList));
-
-
-//        routingTable.printRoutingTable(router_A, "Router A");
-//        routingTable.printRoutingTable(router_B, "Router B");
-//        routingTable.printRoutingTable(router_C, "Router C");
-//        routingTable.printRoutingTable(router_D, "Router D");
-//        routingTable.printRoutingTable(router_E, "Router E");
-//        routingTable.printRoutingTable(router_F, "Router F");
-
-
-
-
-
-
-//        System.out.printf("Router_A = %s\n",router_A.toString());
-//        System.out.printf("Router_B = %s\n",router_B.toString());
-//        System.out.printf("Router_C = %s\n",router_C.toString());
-//        System.out.printf("Router_D = %s\n",router_D.toString());
-//        System.out.printf("Router_E = %s\n",router_E.toString());
-//        System.out.printf("Router_F = %s\n",router_F.toString());
 
 
 
