@@ -3,6 +3,7 @@ package service;
 import model.RouterModel;
 import model.RoutingTableModel;
 
+import javax.xml.ws.ServiceMode;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
-
+@ServiceMode
 public class RoutingTable {
 
     public List<RoutingTableModel> createdRoutingTable(List<RoutingTableModel> router, String filename){
@@ -34,6 +35,15 @@ public class RoutingTable {
         }
 
         return router;
+
+    }
+
+    public void printRoutingTable(List<RoutingTableModel> router, String routerName){
+        System.out.printf("|                    %-41s|\n", "Routing Table in " + routerName);
+        System.out.println("|   destination subnet   |   next router   |   hops to dest   |");
+        for (int i = 0; i < router.size() ; i++){
+            System.out.printf("|       %-17s|       %-10s|         %-9s|\n", router.get(i).getDest_sub(), router.get(i).getNext_router(), router.get(i).getNext_router());
+        }
 
     }
 

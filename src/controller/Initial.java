@@ -30,15 +30,24 @@ public class Initial  {
         routingTable.createdRoutingTable(router_E, "Router_E.txt");
         routingTable.createdRoutingTable(router_F, "Router_F.txt");
 
+        routingTable.printRoutingTable(router_A, "Router A");
+        routingTable.printRoutingTable(router_B, "Router B");
+        routingTable.printRoutingTable(router_C, "Router C");
+        routingTable.printRoutingTable(router_D, "Router D");
+        routingTable.printRoutingTable(router_E, "Router E");
+        routingTable.printRoutingTable(router_F, "Router F");
 
 
 
-        System.out.printf("Router_A = %s\n",router_A.toString());
-        System.out.printf("Router_B = %s\n",router_B.toString());
-        System.out.printf("Router_C = %s\n",router_C.toString());
-        System.out.printf("Router_D = %s\n",router_D.toString());
-        System.out.printf("Router_E = %s\n",router_E.toString());
-        System.out.printf("Router_F = %s\n",router_F.toString());
+
+
+
+//        System.out.printf("Router_A = %s\n",router_A.toString());
+//        System.out.printf("Router_B = %s\n",router_B.toString());
+//        System.out.printf("Router_C = %s\n",router_C.toString());
+//        System.out.printf("Router_D = %s\n",router_D.toString());
+//        System.out.printf("Router_E = %s\n",router_E.toString());
+//        System.out.printf("Router_F = %s\n",router_F.toString());
 
 
 
