@@ -15,6 +15,9 @@ public class Initial  {
 
         RoutingTable routingTable = new RoutingTable();
 
+
+
+
         List<RoutingTableModel> router_A = new ArrayList<RoutingTableModel>();
         List<RoutingTableModel> router_B = new ArrayList<RoutingTableModel>();
         List<RoutingTableModel> router_C = new ArrayList<RoutingTableModel>();
@@ -30,12 +33,30 @@ public class Initial  {
         routingTable.createdRoutingTable(router_E, "Router_E.txt");
         routingTable.createdRoutingTable(router_F, "Router_F.txt");
 
-        routingTable.printRoutingTable(router_A, "Router A");
-        routingTable.printRoutingTable(router_B, "Router B");
-        routingTable.printRoutingTable(router_C, "Router C");
-        routingTable.printRoutingTable(router_D, "Router D");
-        routingTable.printRoutingTable(router_E, "Router E");
-        routingTable.printRoutingTable(router_F, "Router F");
+        List<RouterModel> routerList = new ArrayList<RouterModel>();
+        RouterModel routerModelA = new RouterModel(router_A,"Router A");
+        RouterModel routerModelB = new RouterModel(router_A,"Router B");
+        RouterModel routerModelC = new RouterModel(router_A,"Router C");
+        RouterModel routerModelD = new RouterModel(router_A,"Router D");
+        RouterModel routerModelE = new RouterModel(router_A,"Router E");
+        RouterModel routerModelF = new RouterModel(router_A,"Router F");
+
+        routerList.add(routerModelA);
+        routerList.add(routerModelB);
+        routerList.add(routerModelC);
+        routerList.add(routerModelD);
+        routerList.add(routerModelE);
+        routerList.add(routerModelF);
+
+        routingTable.printRouterList((routerList));
+
+
+//        routingTable.printRoutingTable(router_A, "Router A");
+//        routingTable.printRoutingTable(router_B, "Router B");
+//        routingTable.printRoutingTable(router_C, "Router C");
+//        routingTable.printRoutingTable(router_D, "Router D");
+//        routingTable.printRoutingTable(router_E, "Router E");
+//        routingTable.printRoutingTable(router_F, "Router F");
 
 
 
