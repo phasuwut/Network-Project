@@ -42,7 +42,7 @@ public class RoutingTable {
         System.out.printf("|                    %-41s|\n", "Routing Table in " + routerName);
         System.out.println("|   destination subnet   |   next router   |   hops to dest   |");
         for (int i = 0; i < router.size() ; i++){
-            System.out.printf("|       %-17s|       %-10s|         %-9s|\n", router.get(i).getDest_sub(), router.get(i).getNext_router(), router.get(i).getNext_router());
+            System.out.printf("|       %-17s|       %-10s|         %-9s|\n", router.get(i).getDest_sub(), router.get(i).getNext_router(), router.get(i).getHops_to_dest());
         }
 
     }
