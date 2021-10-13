@@ -6,6 +6,7 @@ public class Initial  {
         FileReader r = new FileReader();
 
         for(; ascii <= 70; ascii++){
+
             r.readFile("Router_"+ (char)ascii +".txt");
         }
 

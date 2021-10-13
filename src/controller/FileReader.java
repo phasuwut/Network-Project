@@ -5,13 +5,14 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 
+
 public class FileReader {
 //    public static void main(String[] args) {
 
         public void readFile(String filename){
             try {
 
-                File  myObj = new File (filename);
+                File  myObj = new File ("Network-Project/" + filename);
                 Scanner myReader = new Scanner(myObj);
                 String filename_ = myObj.getName().replace(".","=");
                 System.out.printf("|                    %-41s|\n", "Routing Table in " + filename_.split("=")[0]);
