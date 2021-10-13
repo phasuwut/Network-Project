@@ -16,8 +16,6 @@ public class Initial  {
         RoutingTable routingTable = new RoutingTable();
 
 
-
-
         List<RoutingTableModel> router_A = new ArrayList<RoutingTableModel>();
         List<RoutingTableModel> router_B = new ArrayList<RoutingTableModel>();
         List<RoutingTableModel> router_C = new ArrayList<RoutingTableModel>();

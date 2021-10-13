@@ -57,6 +57,7 @@ public class RoutingTable {
 
                 System.out.printf("|       %-17s|       %-10s|         %-9s|\n", routerList.get(i).getRoutingTableModels().get(j).getDest_sub(), routerList.get(i).getRoutingTableModels().get(j).getNext_router(), routerList.get(i).getRoutingTableModels().get(j).getHops_to_dest());
             }
+            System.out.println();
         }
 
     }
