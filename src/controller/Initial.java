@@ -15,6 +15,7 @@ public class Initial  {
 
         RoutingTable routingTable = new RoutingTable();
 
+        ArrayList<String> listSubnet = new ArrayList<String>(); // keep subnet
 
         List<RoutingTableModel> router_A = new ArrayList<RoutingTableModel>();
         List<RoutingTableModel> router_B = new ArrayList<RoutingTableModel>();
@@ -46,7 +47,11 @@ public class Initial  {
         routerList.add(routerModelE);
         routerList.add(routerModelF);
 
-        routingTable.printRouterList((routerList));
+        //System.out.print(routerList);
+        System.out.println();
+        System.out.print(   routingTable. getSubnet(routerList));
+
+        //routingTable.printRouterList((routerList));
 
 
 

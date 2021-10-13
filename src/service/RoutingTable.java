@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
 
 @ServiceMode
 public class RoutingTable {
@@ -60,6 +61,18 @@ public class RoutingTable {
             System.out.println();
         }
 
+    }
+
+    public ArrayList getSubnet(List<RouterModel> routerList){
+        ArrayList<String> listSubnet = new ArrayList<String>(); // keep subnet\
+        for (int i = 0; i < routerList.size() ; i++){
+            for (int j = 0; j < routerList.get(i).getRoutingTableModels().size() ; j++){
+                if(!listSubnet.contains(routerList.get(i).getRoutingTableModels().get(j).getDest_sub())){
+                    listSubnet.add(routerList.get(i).getRoutingTableModels().get(j).getDest_sub());
+                }
+            }
+        }
+        return listSubnet;
     }
 
 }

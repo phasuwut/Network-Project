@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="c93ae831-e89f-48ef-93f0-10f6b02118dd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/description.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/project-template.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/untitled104.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Router_A.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Router_B.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Router_C.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Router_D.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Router_E.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Router_F.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test2/controller/FileReader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/test2/controller/Initial.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/FileReader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/Initial.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Neighbor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/RouterModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/RoutingTableModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/RoutingTable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test3.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled104/controller/Initial.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/controller/Initial.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled104/service/RoutingTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/service/RoutingTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Initial.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Initial.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/RoutingTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/RoutingTable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
