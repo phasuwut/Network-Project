@@ -1,4 +1,6 @@
 package controller;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,7 +12,9 @@ public class FileReader {
         public void readFile(String filename){
             try {
 
-                File  myObj = new File ("Network-Project/" + filename);
+
+                //File  myObj = new File ("Network-Project/" + filename);
+                File  myObj = new File ("data/" + filename);
                 Scanner myReader = new Scanner(myObj);
                 String filename_ = myObj.getName().replace(".","=");
                 System.out.printf("|                    %-41s|\n", "Routing Table in " + filename_.split("=")[0]);
