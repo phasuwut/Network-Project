@@ -8,6 +8,7 @@ public class Initial  {
         for(; ascii <= 70; ascii++){
 
             r.readFile("Router_"+ (char)ascii +".txt");
+
         }
 
     }
