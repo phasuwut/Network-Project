@@ -1,13 +1,11 @@
 package controller;
 
-import java.io.File;  // Import the File class
-//import java.io.FileInputStream;
-import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 
 public class FileReader {
-//    public static void main(String[] args) {
 
         public void readFile(String filename){
             try {
