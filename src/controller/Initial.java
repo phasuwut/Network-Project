@@ -86,15 +86,38 @@ public class Initial extends Thread {
         neighbors_F.add(new Neighbor(routerModelB.getName(), routerModelB.getPort(), routerModelB.getRoutingTableModels()));
         neighbors_F.add(new Neighbor(routerModelE.getName(), routerModelE.getPort(), routerModelE.getRoutingTableModels()));
         routerService.addNeighbor(routerModelF, neighbors_F);
-
+//
         routerList.add(routerModelA);
         routerList.add(routerModelB);
         routerList.add(routerModelC);
         routerList.add(routerModelD);
         routerList.add(routerModelE);
         routerList.add(routerModelF);
+//        routerService.updateForwarding(router_A,"192.168.2.0", "A", "3"); // updateFoll
 
+
+        routerService.updateRoutingTable(router_A, neighbors_A);
+        routerService.updateNeighborRoutingTable(routerList, routerModelA); // update ตารางเพื่อนบ้าน
+
+        routerService.updateRoutingTable(router_B, neighbors_B);
+        routerService.updateNeighborRoutingTable(routerList, routerModelB); // update ตารางเพื่อนบ้าน
+
+        routerService.updateRoutingTable(router_C, neighbors_C);
+        routerService.updateNeighborRoutingTable(routerList, routerModelC); // update ตารางเพื่อนบ้าน
+
+        routerService.updateRoutingTable(router_D, neighbors_D);
+        routerService.updateNeighborRoutingTable(routerList, routerModelD); // update ตารางเพื่อนบ้าน
+
+        routerService.updateRoutingTable(router_E, neighbors_E);
+        routerService.updateNeighborRoutingTable(routerList, routerModelE); // update ตารางเพื่อนบ้าน
+
+        routerService.updateRoutingTable(router_F, neighbors_F);
+        routerService.updateNeighborRoutingTable(routerList, routerModelF); // update ตารางเพื่อนบ้าน
+        
         routingTable.printRouterList((routerList));
+
+
+
 //        Server server_A = new Server();
 //        server_A.start(routerModelA.getPort());
 //

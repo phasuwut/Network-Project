@@ -58,13 +58,14 @@ public class RoutingTable {
                 System.out.printf("|       %-17s|       %-10s|         %-9s|\n", routerList.get(i).getRoutingTableModels().get(j).getDest_sub(), routerList.get(i).getRoutingTableModels().get(j).getNext_router(), routerList.get(i).getRoutingTableModels().get(j).getHops_to_dest());
             }
             System.out.println();
-            for (int k = 0; k < routerList.get(i).getNeighbors().size() ; k++){
-
-                System.out.printf("|       %-17s|\n", routerList.get(i).getNeighbors().get(k).getName());
-                System.out.printf("|       %-17s|\n", routerList.get(i).getNeighbors().get(k).getRoutingTableModel());
-
-            }
-            System.out.println();
+//             print neighbor
+//            for (int k = 0; k < routerList.get(i).getNeighbors().size() ; k++){
+//
+//                System.out.printf("|       %-17s|\n", routerList.get(i).getNeighbors().get(k).getName());
+//                System.out.printf("|       %-17s|\n", routerList.get(i).getNeighbors().get(k).getRoutingTableModel());
+//
+//            }
+//            System.out.println();
         }
 
     }
