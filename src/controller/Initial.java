@@ -59,8 +59,6 @@ public class Initial extends Thread {
 
         List<Neighbor> neighbors_B = new ArrayList<Neighbor>();
         neighbors_B.add(new Neighbor(routerModelA.getName(), routerModelA.getPort(),routerModelA.getRoutingTableModels()));
-        neighbors_B.add(new Neighbor(routerModelC.getName(), routerModelC.getPort(), routerModelC.getRoutingTableModels()));
-        neighbors_B.add(new Neighbor(routerModelD.getName(), routerModelD.getPort(), routerModelD.getRoutingTableModels()));
         neighbors_B.add(new Neighbor(routerModelE.getName(), routerModelE.getPort(), routerModelE.getRoutingTableModels()));
         neighbors_B.add(new Neighbor(routerModelF.getName(), routerModelF.getPort(), routerModelF.getRoutingTableModels()));
         routerService.addNeighbor(routerModelB, neighbors_B);
