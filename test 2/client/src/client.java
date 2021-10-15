@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class client {
+public class client {
+    public static  void main(String[] args) {
+        System.out.print("hello");
+    }
 }
