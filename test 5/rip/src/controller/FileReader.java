@@ -10,7 +10,7 @@ public class FileReader {
         public void readFile(String filename){
             try {
 
-                File  myObj = new File ("Network-Project/" + filename);
+                File  myObj = new File ("rip/src/data/" + filename);
                 Scanner myReader = new Scanner(myObj);
                 String filename_ = myObj.getName().replace(".","=");
                 System.out.printf("|                    %-41s|\n", "Routing Table in " + filename_.split("=")[0]);
