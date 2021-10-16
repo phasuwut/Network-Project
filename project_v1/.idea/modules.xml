@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RIP/RIP.iml" filepath="$PROJECT_DIR$/RIP/RIP.iml" />
       <module fileurl="file://$PROJECT_DIR$/project_v1.iml" filepath="$PROJECT_DIR$/project_v1.iml" />
       <module fileurl="file://$PROJECT_DIR$/router_1/router_1.iml" filepath="$PROJECT_DIR$/router_1/router_1.iml" />
       <module fileurl="file://$PROJECT_DIR$/router_A/router_A.iml" filepath="$PROJECT_DIR$/router_A/router_A.iml" />

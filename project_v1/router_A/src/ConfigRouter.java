@@ -1,10 +1,11 @@
 import java.net.InetAddress;
-package project_v1.RIP;
 
+import RIP.controller.*;
 
 public class ConfigRouter {
     static int port=9091;
     static String routerName="Too";
+    static String routerFile="Router_A.txt";
 
     public int getPort(){
         return port;
@@ -22,6 +23,14 @@ public class ConfigRouter {
     public String getRouterName(){
         return routerName;
     }
+
+    public void getFile(){
+        FileReader fileReader =new FileReader();
+        fileReader.readFile(routerFile);
+      //  System.out.print(  fileReader.readFile("routerFile"));
+        System.out.print("readFile");
+    }
+
 
 
 }
