@@ -1,6 +1,11 @@
 import java.net.InetAddress;
 
 import RIP.controller.*;
+import RIP.model.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ConfigRouter {
     static int port=9091;
@@ -24,13 +29,11 @@ public class ConfigRouter {
         return routerName;
     }
 
+    public static List<RoutingTableModel> dataRouting = new ArrayList<RoutingTableModel>();
+
     public void getFile(){
         FileReader fileReader =new FileReader();
-        fileReader.readFile(routerFile);
-      //  System.out.print(  fileReader.readFile("routerFile"));
-        System.out.print("readFile");
+        System.out.println(   fileReader.createdRoutingTable(dataRouting,routerFile));
     }
-
-
 
 }

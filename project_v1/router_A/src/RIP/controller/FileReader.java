@@ -4,28 +4,29 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import RIP.model.*;
+
 public class FileReader {
 
-    public void readFile(String filename){
+    public List<RoutingTableModel>  createdRoutingTable(List<RoutingTableModel> router,String filename){
         try {
-
             File  myObj = new File ("router_A/src/RIP/data/" + filename);
             Scanner myReader = new Scanner(myObj);
-            String filename_ = myObj.getName().replace(".","=");
-            System.out.printf("|                    %-41s|\n", "Routing Table in " + filename_.split("=")[0]);
-            System.out.println("|   destination subnet   |   next router   |   hops to dest   |");
-
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                System.out.printf("|       %-17s|       %-10s|         %-9s|\n", data.split(":")[0],data.split(":")[1],data.split(":")[2]);
+                RoutingTableModel routingTableModel = new RoutingTableModel(data.split(":")[0], data.split(":")[1], data.split(":")[2]);
+                router.add(routingTableModel);
             }
-            System.out.println("");
-
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return router;
     }
-//    }
+
 }

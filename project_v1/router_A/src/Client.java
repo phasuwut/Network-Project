@@ -10,7 +10,7 @@ class Client{
         int port = configRouter.getPort();
         String ipAddress =  configRouter.getIp();
 
-        configRouter.getFile();
+        configRouter.getFile();// print RoutingTable's A
 
         // connection socket
         Socket socketServer=new Socket(ipAddress,port);
