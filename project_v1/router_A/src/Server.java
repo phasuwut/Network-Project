@@ -7,8 +7,9 @@ import java.net.UnknownHostException;
 
 class Server{
     public static void main(String args[])throws Exception{
+        ConfigRouter configRouter = new ConfigRouter();
+        int port = configRouter.getPort();
 
-        int port=9091;
         ServerSocket socketServer=new ServerSocket(port);
 
         Socket s=socketServer.accept();

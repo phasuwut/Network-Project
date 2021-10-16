@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class rip {
+public class rip {
+    public static void main(String[] args) {
+
+    }
 }

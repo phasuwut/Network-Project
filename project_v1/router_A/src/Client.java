@@ -1,15 +1,14 @@
 import java.net.*;
 import java.io.*;
-//ip address
-import java.net.InetAddress;
+
+
 
 class Client{
     public static void main(String args[])throws Exception{
-        //fix ip port
-        int port=9091;
-        InetAddress address = InetAddress.getLocalHost();
-        String ipAddress = address.getHostAddress();
-        System.out.println(ipAddress);
+        //fig ip port
+        ConfigRouter configRouter = new ConfigRouter();
+        int port = configRouter.getPort();
+        String ipAddress =  configRouter.getIp();
 
         // connection socket
         Socket socketServer=new Socket(ipAddress,port);
