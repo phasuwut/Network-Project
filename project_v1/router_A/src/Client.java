@@ -2,15 +2,16 @@ import java.net.*;
 import java.io.*;
 //ip address
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 class Client{
     public static void main(String args[])throws Exception{
-        //fix value
+        //fix ip port
         int port=9091;
         InetAddress address = InetAddress.getLocalHost();
         String ipAddress = address.getHostAddress();
+        System.out.println(ipAddress);
 
+        // connection socket
         Socket socketServer=new Socket(ipAddress,port);
 
         DataInputStream din=new DataInputStream(socketServer.getInputStream());
@@ -28,4 +29,5 @@ class Client{
 
         dout.close();
         socketServer.close();
-    }}
+    }
+}
