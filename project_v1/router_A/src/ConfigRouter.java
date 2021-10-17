@@ -31,9 +31,10 @@ public class ConfigRouter {
 
     public static List<RoutingTableModel> dataRouting = new ArrayList<RoutingTableModel>();
 
-    public void getFile(){
+    public List<RoutingTableModel> getFile(){
         FileReader fileReader =new FileReader();
-        System.out.println(   fileReader.createdRoutingTable(dataRouting,routerFile));
+        //System.out.println(fileReader.createdRoutingTable(dataRouting,routerFile));
+        return fileReader.createdRoutingTable(dataRouting,routerFile);
     }
 
 }

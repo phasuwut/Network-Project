@@ -11,7 +11,6 @@ import java.util.List;
 import RIP.model.*;
 
 public class FileReader {
-
     public List<RoutingTableModel>  createdRoutingTable(List<RoutingTableModel> router,String filename){
         try {
             File  myObj = new File ("router_A/src/RIP/data/" + filename);
@@ -28,5 +27,4 @@ public class FileReader {
         }
         return router;
     }
-
 }

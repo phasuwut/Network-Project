@@ -1,6 +1,10 @@
 import java.net.*;
 import java.io.*;
 
+import java.util.List;
+import RIP.model.*;
+import java.net.DatagramPacket;
+import java.util.Scanner;
 
 
 class Client{
@@ -9,26 +13,29 @@ class Client{
         ConfigRouter configRouter = new ConfigRouter();
         int port = configRouter.getPort();
         String ipAddress =  configRouter.getIp();
+        InetAddress ip = InetAddress.getByName(ipAddress);
+        System.out.println(ip);
+        // print RoutingTable's A
+        System.out.println(configRouter.getFile());
 
-        configRouter.getFile();// print RoutingTable's A
 
-        // connection socket
-        Socket socketServer=new Socket(ipAddress,port);
 
-        DataInputStream din=new DataInputStream(socketServer.getInputStream());
-        DataOutputStream dout=new DataOutputStream(socketServer.getOutputStream());
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        DatagramSocket ds = new DatagramSocket();
+        byte buf[] = null;
+        Scanner sc = new Scanner(System.in);
 
-        String str="",str2="";
-        while(!str.equals("stop")){
-            str=br.readLine();
-            dout.writeUTF(str);
-            dout.flush();
-            str2=din.readUTF();
-            System.out.println("Server says: "+str2);
+        // loop while user not enters "bye"
+        while (true)
+        {
+            String inp = sc.nextLine();
+
+            buf = inp.getBytes();
+            DatagramPacket DpSend = new DatagramPacket(buf, buf.length, ip, port);
+            ds.send(DpSend);
+
+            // break the loop if user enters "bye"
+            if (inp.equals("bye"))
+                break;
         }
-
-        dout.close();
-        socketServer.close();
     }
 }

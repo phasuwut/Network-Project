@@ -10,22 +10,44 @@ class Server{
         ConfigRouter configRouter = new ConfigRouter();
         int port = configRouter.getPort();
 
-        ServerSocket socketServer=new ServerSocket(port);
+        // Step 1 : Create a socket to listen at port 1234
+        DatagramSocket ds = new DatagramSocket(port );
+        byte[] receive = new byte[65535];
 
-        Socket s=socketServer.accept();
-        DataInputStream din=new DataInputStream(s.getInputStream());
-        DataOutputStream dout=new DataOutputStream(s.getOutputStream());
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        DatagramPacket DpReceive = null;
+        while (true)
+        {
 
-        String str="",str2="";
-        while(!str.equals("stop")){
-            str=din.readUTF();
-            System.out.println("client says: "+str);
-            str2=br.readLine();
-            dout.writeUTF(str2);
-            dout.flush();
+            // Step 2 : create a DatgramPacket to receive the data.
+            DpReceive = new DatagramPacket(receive, receive.length);
+
+            // Step 3 : revieve the data in byte buffer.
+            ds.receive(DpReceive);
+
+            System.out.println("Client:-" + data(receive));
+
+            // Exit the server if the client sends "bye"
+            if (data(receive).toString().equals("bye"))
+            {
+                System.out.println("Client sent bye.....EXITING");
+                break;
+            }
+
+            // Clear the buffer after every message.
+            receive = new byte[65535];
         }
-        din.close();
-        s.close();
-        socketServer.close();
-    }}
+    }
+
+    public static StringBuilder data(byte[] a) {
+        if (a == null)
+            return null;
+        StringBuilder ret = new StringBuilder();
+        int i = 0;
+        while (a[i] != 0)
+        {
+            ret.append((char) a[i]);
+            i++;
+        }
+        return ret;
+    }
+}
