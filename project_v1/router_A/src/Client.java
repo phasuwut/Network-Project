@@ -5,6 +5,7 @@ import java.util.List;
 import RIP.model.*;
 import java.net.DatagramPacket;
 import java.util.Scanner;
+import java.util.Arrays;
 
 
 class Client{
@@ -19,23 +20,41 @@ class Client{
         System.out.println(configRouter.getFile());
 
 
-
-        DatagramSocket ds = new DatagramSocket();
-        byte buf[] = null;
-        Scanner sc = new Scanner(System.in);
-
         // loop while user not enters "bye"
         while (true)
         {
-            String inp = sc.nextLine();
+            BufferedReader inFromUser =new BufferedReader(new InputStreamReader(System.in));
+            DatagramSocket clientSocket = new DatagramSocket();
 
-            buf = inp.getBytes();
-            DatagramPacket DpSend = new DatagramPacket(buf, buf.length, ip, port);
-            ds.send(DpSend);
+            byte[] sendData = new byte[1024]; //input
+            byte[] receiveData = new byte[1024]; //output
+
+            String sentence = inFromUser.readLine();// >> cin
+            sendData = sentence.getBytes();
+            sendData = configRouter.getFile().getBytes();
+
+            // how to https://www.devzoneoriginal.com/2020/07/java-socket-example-for-sending-and.html
+           // String req = Arrays.toString(configRouter.getFile());
+           // System.out.println(req);
+
+            //send
+            DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length,ip, port);
+            clientSocket.send(sendPacket);
+
+            //response
+            DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
+            clientSocket.receive(receivePacket);
+
+            System.out.println(receivePacket);
+            String modifiedSentence = new String(receivePacket.getData());
+            System.out.println("FROM SERVER:" + modifiedSentence);
 
             // break the loop if user enters "bye"
-            if (inp.equals("bye"))
+            if (sentence.equals("bye")){
+                clientSocket.close();
                 break;
+            }
+
         }
     }
 }
