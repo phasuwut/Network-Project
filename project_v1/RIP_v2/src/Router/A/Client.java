@@ -19,6 +19,9 @@ public class Client {
             InetAddress IPAddress = InetAddress.getByName("localhost");
             byte[] incomingData = new byte[1024];
             Student student = new Student(1, "Bijoy", "Kerala");
+            System.out.println("student");
+            System.out.println(student);
+
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(outputStream);
             os.writeObject(student);

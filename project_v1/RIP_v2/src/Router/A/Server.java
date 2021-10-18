@@ -29,7 +29,14 @@ public class Server {
                 ByteArrayInputStream in = new ByteArrayInputStream(data);
                 ObjectInputStream is = new ObjectInputStream(in);
                 try {
+                    System.out.println(is);
                     Student student = (Student) is.readObject();
+
+                    Student student2 =new  Student(555,"data", "nana") ;
+                    System.out.println(student2);
+
+
+                    ///System.out.println(is.readObject());
                     System.out.println("Student object received = "+student);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
@@ -52,8 +59,6 @@ public class Server {
             e.printStackTrace();
         } catch (IOException i) {
             i.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
