@@ -40,7 +40,7 @@ class Client{
 
             String sentence = inFromUser.readLine();// >> cin
             sendData = sentence.getBytes();
-            sendData = configRouter.getFile().getBytes();
+           // sendData = configRouter.getFile().getBytes();
 
             // how to https://www.devzoneoriginal.com/2020/07/java-socket-example-for-sending-and.html
            // String req = Arrays.toString(configRouter.getFile());

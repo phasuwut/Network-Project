@@ -24,6 +24,7 @@ class Server{
             InetAddress IPAddress = receivePacket.getAddress();
             int port2 = receivePacket.getPort();
             String capitalizedSentence = sentence.toUpperCase();
+            System.out.println(capitalizedSentence);
             sendData = capitalizedSentence.getBytes();
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port2);
             serverSocket.send(sendPacket);
