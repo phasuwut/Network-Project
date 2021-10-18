@@ -1,7 +1,13 @@
+import RIP.model.RoutingTableModel;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.*;
 import java.io.ObjectOutputStream;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Client {
     DatagramSocket Socket;
@@ -9,37 +15,24 @@ public class Client {
 
     public void createAndListenSocket() {
         try {
+            //fig ip port
+            ConfigRouter configRouter = new ConfigRouter();
+            int port = configRouter.getPort();
+            String ipAddress =  configRouter.getIp();
+            InetAddress ip = InetAddress.getByName(ipAddress);
 
-            Socket = new DatagramSocket();
-            InetAddress IPAddress = InetAddress.getByName("localhost");
-            byte[] incomingData = new byte[1024];
+            System.out.println(configRouter.getFile());
 
-            Student student = new Student(1, "Bijoy", "Kerala"); //
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ObjectOutputStream os = new ObjectOutputStream(outputStream);
-            os.writeObject(student);//
+            List<RoutingTableModel> dataRouting = new ArrayList<RoutingTableModel>();
+            dataRouting= configRouter.getFile();
+            System.out.println(dataRouting);
 
-            byte[] data = outputStream.toByteArray(); // ข้อมูลที่ส่ง
-            System.out.println("1");
-            System.out.println(student);
-            System.out.println("2");
-            System.out.println(data);
 
-            DatagramPacket sendPacket = new DatagramPacket(data, data.length, IPAddress, 9876);
-            Socket.send(sendPacket);
 
-            System.out.println("Message sent from client");
-
-            //Response
-            DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
-            Socket.receive(incomingPacket);
-            String response = new String(incomingPacket.getData());
-            System.out.println("Response from server:" + response);
 
         } catch (Exception e) {
             System.out.println(e);
         }
-
     }
 
     public static void main(String[] args) {

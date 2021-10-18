@@ -20,7 +20,6 @@ class Client{
         // print RoutingTable's A
         System.out.println(configRouter.getFile());
 
-
         // loop while user not enters "bye"
         while (true)
         {

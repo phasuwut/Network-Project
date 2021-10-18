@@ -1,6 +1,8 @@
 
 
 
+import RIP.model.RoutingTableModel;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -8,6 +10,12 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Server {
     DatagramSocket socket = null;
     public Server() {
@@ -15,7 +23,12 @@ public class Server {
 
     public void createAndListenSocket() {
         try {
-            socket = new DatagramSocket(9876);
+            //fig ip port
+            ConfigRouter configRouter = new ConfigRouter();
+            int portServer = configRouter.getPort();
+
+
+            socket = new DatagramSocket(portServer);
             byte[] incomingData = new byte[1024];
 
             while (true) {
@@ -24,15 +37,22 @@ public class Server {
 
                 byte[] data = incomingPacket.getData();
 
+                System.out.println("RIP.data");
                 System.out.println(data);
-
                 ByteArrayInputStream in = new ByteArrayInputStream(data);
                 ObjectInputStream is = new ObjectInputStream(in);
                 try {
-                    Student student = (Student) is.readObject();
-                    System.out.println("Student object received = "+student);
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                    System.out.println("1");
+
+                    List<RoutingTableModel> dataRouting = new ArrayList<RoutingTableModel>();
+                    //dataRouting=RIP.data;
+
+
+                    System.out.println(is.readObject());
+
+
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
 
 

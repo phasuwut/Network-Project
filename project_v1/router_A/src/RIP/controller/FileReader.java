@@ -13,7 +13,7 @@ import RIP.model.*;
 public class FileReader {
     public List<RoutingTableModel>  createdRoutingTable(List<RoutingTableModel> router,String filename){
         try {
-            File  myObj = new File ("router_A/src/RIP/data/" + filename);
+            File  myObj = new File ("router_A/src/RIP/RIP.data/" + filename);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
