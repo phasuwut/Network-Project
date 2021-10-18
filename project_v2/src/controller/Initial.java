@@ -40,8 +40,6 @@ public class Initial extends Thread {
         List<RoutingTableModel> router_F = new ArrayList<RoutingTableModel>();
         routingTable.createdRoutingTable(router_F, "Router_F.txt");
 
-
-
         List<RouterModel> routerList = new ArrayList<RouterModel>();
         RouterModel routerModelA = new RouterModel(router_A,"Router A", "9091");
         RouterModel routerModelB = new RouterModel(router_B,"Router B", "9092");
