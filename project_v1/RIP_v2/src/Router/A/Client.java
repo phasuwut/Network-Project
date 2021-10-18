@@ -5,15 +5,32 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import model.RoutingTableModel;
+
+import controller.*;
+
 public class Client {
     DatagramSocket Socket;
 
     public Client() {
 
     }
+    public static List<RoutingTableModel> dataRouting = new ArrayList<RoutingTableModel>();
 
     public void createAndListenSocket() {
         try {
+
+            FileReader fileReader =new FileReader();
+            fileReader.createdRoutingTable(dataRouting );
+            System.out.println("dataRouting");
+            System.out.println(dataRouting);  //  ArrayList
+
+
+
+
 
             Socket = new DatagramSocket();
             InetAddress IPAddress = InetAddress.getByName("localhost");

@@ -47,4 +47,11 @@ public class RoutingTableModel {
     public String toString() {
         return "[destination subnet = " + dest_sub + ", next router = " + next_router + ", hops to dest = " + hops_to_dest +" ]";
     }
+
+
+    public  void AddRoutingTableModel(String dest_sub, String next_router, String hops_to_dest) {
+        this.dest_sub = dest_sub;
+        this.next_router = next_router;
+        this.hops_to_dest = hops_to_dest;
+    }
 }
