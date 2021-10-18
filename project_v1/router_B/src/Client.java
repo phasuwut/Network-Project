@@ -19,6 +19,7 @@ public class Client {
         messages.add(new Message("What time is it?"));
         messages.add(new Message("Hi hi hi hi."));
 
+        System.out.println( messages);
         System.out.println("Sending messages to the ServerSocket");
         objectOutputStream.writeObject(messages);
 
