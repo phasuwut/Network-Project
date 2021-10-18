@@ -7,6 +7,7 @@ import java.net.DatagramPacket;
 import java.util.Scanner;
 import java.util.Arrays;
 
+import RIP.model.RoutingTableModel;
 
 class Client{
     public static void main(String args[])throws Exception{
@@ -23,6 +24,14 @@ class Client{
         // loop while user not enters "bye"
         while (true)
         {
+
+            // how to https://gist.github.com/chatton/14110d2550126b12c0254501dde73616
+
+
+
+
+
+
             BufferedReader inFromUser =new BufferedReader(new InputStreamReader(System.in));
             DatagramSocket clientSocket = new DatagramSocket();
 

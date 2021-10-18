@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/project_v1.iml" filepath="$PROJECT_DIR$/project_v1.iml" />
       <module fileurl="file://$PROJECT_DIR$/router_1/router_1.iml" filepath="$PROJECT_DIR$/router_1/router_1.iml" />
       <module fileurl="file://$PROJECT_DIR$/router_A/router_A.iml" filepath="$PROJECT_DIR$/router_A/router_A.iml" />
+      <module fileurl="file://$PROJECT_DIR$/router_B/router_B.iml" filepath="$PROJECT_DIR$/router_B/router_B.iml" />
     </modules>
   </component>
 </project>
