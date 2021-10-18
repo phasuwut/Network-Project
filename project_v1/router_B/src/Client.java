@@ -1,3 +1,55 @@
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.*;
+import java.io.ObjectOutputStream;
+
+public class Client {
+    DatagramSocket Socket;
+    public Client() {}
+
+    public void createAndListenSocket() {
+        try {
+
+            Socket = new DatagramSocket();
+            InetAddress IPAddress = InetAddress.getByName("localhost");
+            byte[] incomingData = new byte[1024];
+
+            Student student = new Student(1, "Bijoy", "Kerala"); //
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ObjectOutputStream os = new ObjectOutputStream(outputStream);
+            os.writeObject(student);//
+
+            byte[] data = outputStream.toByteArray(); // ข้อมูลที่ส่ง
+            System.out.println("1");
+            System.out.println(student);
+            System.out.println("2");
+            System.out.println(data);
+
+            DatagramPacket sendPacket = new DatagramPacket(data, data.length, IPAddress, 9876);
+            Socket.send(sendPacket);
+
+            System.out.println("Message sent from client");
+
+            //Response
+            DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
+            Socket.receive(incomingPacket);
+            String response = new String(incomingPacket.getData());
+            System.out.println("Response from server:" + response);
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Client client = new Client();
+        client.createAndListenSocket();
+    }
+}
+
+
+/*
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -27,4 +79,4 @@ public class Client {
         socket.close();
     }
 }
-// https://gist.github.com/chatton/14110d2550126b12c0254501dde73616
+// https://gist.github.com/chatton/14110d2550126b12c0254501dde73616*/
