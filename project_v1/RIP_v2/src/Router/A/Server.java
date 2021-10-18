@@ -9,7 +9,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 
 
-// how to http://www.java2s.com/example/java/network/udp-send-object.html
+// how to http://www.coderpanda.com/java-socket-programming-transferring-java-object-through-socket-using-udp/
 public class Server {
     DatagramSocket socket = null;
 
