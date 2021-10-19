@@ -52,8 +52,16 @@ public class RouterModel {
         this.port = port;
     }
 
+
     @Override
     public String toString() {
         return "[name = " + name + ", port =" + port + ", neighbors = " + neighbors +", routingTable = " +routingTableModels +" ]";
+    }
+
+    public void setRoutingTableModels2(String data) {
+        System.out.println(data);
+
+
+        //this.routingTableModels = routingTableModels;
     }
 }
