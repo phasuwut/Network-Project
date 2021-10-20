@@ -8,6 +8,12 @@ public class RouterModel {
 
     private String name;
 
+    private String port;
+
+    private List<Neighbor> neighbors;
+
+
+
     public List<RoutingTableModel> getRoutingTableModels() {
         return routingTableModels;
     }
@@ -24,13 +30,30 @@ public class RouterModel {
         this.name = name;
     }
 
-    public RouterModel(List<RoutingTableModel> routingTableModels, String name) {
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public List<Neighbor> getNeighbors() {
+        return neighbors;
+    }
+
+    public void setNeighbors(List<Neighbor> neighbors) {
+        this.neighbors = neighbors;
+    }
+
+    public RouterModel(List<RoutingTableModel> routingTableModels, String name, String port) {
         this.routingTableModels = routingTableModels;
         this.name = name;
+        this.port = port;
     }
 
     @Override
     public String toString() {
-        return "[name = " + name + ", routingTableModels = " +routingTableModels +" ]";
+        return "[name = " + name + ", port =" + port + ", neighbors = " + neighbors +", routingTable = " +routingTableModels +" ]";
     }
 }
