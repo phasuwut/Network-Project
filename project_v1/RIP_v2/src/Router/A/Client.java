@@ -98,3 +98,5 @@ public class Client {
         client.createAndListenSocket();
     }
 }
+
+// https://titanwolf.org/Network/Articles/Article?AID=5b1c9a7c-2584-47eb-950c-7f2315f540df
