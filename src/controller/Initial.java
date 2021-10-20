@@ -93,28 +93,39 @@ public class Initial extends Thread {
         routerList.add(routerModelD);
         routerList.add(routerModelE);
         routerList.add(routerModelF);
-//        routerService.updateForwarding(router_A,"192.168.2.0", "A", "3"); // updateFoll
+
+        routingTable.printRouterList(routerList);
+        routerService.getCompletedRoutingTable(routerList);
+        routingTable.printRouterList(routerList);
+//        routerService.deletedRouter(routerList, "Router D");
+//        routingTable.printRouterList(routerList);
 
 
-        routerService.updateRoutingTable(router_A, neighbors_A);
-        routerService.updateNeighborRoutingTable(routerList, routerModelA); // update ตารางเพื่อนบ้าน
 
-        routerService.updateRoutingTable(router_B, neighbors_B);
-        routerService.updateNeighborRoutingTable(routerList, routerModelB); // update ตารางเพื่อนบ้าน
 
-        routerService.updateRoutingTable(router_C, neighbors_C);
-        routerService.updateNeighborRoutingTable(routerList, routerModelC); // update ตารางเพื่อนบ้าน
 
-        routerService.updateRoutingTable(router_D, neighbors_D);
-        routerService.updateNeighborRoutingTable(routerList, routerModelD); // update ตารางเพื่อนบ้าน
 
-        routerService.updateRoutingTable(router_E, neighbors_E);
-        routerService.updateNeighborRoutingTable(routerList, routerModelE); // update ตารางเพื่อนบ้าน
 
-        routerService.updateRoutingTable(router_F, neighbors_F);
-        routerService.updateNeighborRoutingTable(routerList, routerModelF); // update ตารางเพื่อนบ้าน
-        
-        routingTable.printRouterList((routerList));
+
+//        routerService.updateRoutingTable(router_A, neighbors_A); // เพิ่มเพื่อนบ้านให้ A แล้ว A ก็อัพเดท routing table ตัวเอง
+//        routerService.updateNeighborRoutingTable(routerList, routerModelA); // update routing table ของเพื่อนบ้าน A
+//
+//        routerService.updateRoutingTable(router_B, neighbors_B);
+//        routerService.updateNeighborRoutingTable(routerList, routerModelB); // update ตารางเพื่อนบ้าน
+//
+//        routerService.updateRoutingTable(router_C, neighbors_C);
+//        routerService.updateNeighborRoutingTable(routerList, routerModelC); // update ตารางเพื่อนบ้าน
+//
+//        routerService.updateRoutingTable(router_D, neighbors_D);
+//        routerService.updateNeighborRoutingTable(routerList, routerModelD); // update ตารางเพื่อนบ้าน
+//
+//        routerService.updateRoutingTable(router_E, neighbors_E);
+//        routerService.updateNeighborRoutingTable(routerList, routerModelE); // update ตารางเพื่อนบ้าน
+//
+//        routerService.updateRoutingTable(router_F, neighbors_F);
+//        routerService.updateNeighborRoutingTable(routerList, routerModelF); // update ตารางเพื่อนบ้าน
+
+
 
 
 
