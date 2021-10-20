@@ -17,9 +17,8 @@ public class RoutingTable {
     public List<RoutingTableModel> createdRoutingTable(List<RoutingTableModel> router, String filename){
 //        RoutingTableModel routingTableModel = new RoutingTableModel();
         try {
-            File myObj = new File ("Network-Project/" + filename);
+            File myObj = new File ("Data/" + filename);
             Scanner myReader = new Scanner(myObj);
-
 
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
