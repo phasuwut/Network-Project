@@ -70,7 +70,17 @@ public class Client {
             // os.writeObject(object);
             System.out.println(2);
 
-
+/*            System.out.println(1);
+            System.out.println( routerModelA.getRoutingTableModels().toString());
+            JSONObject jsonObject = new JSONObject();
+            System.out.println(jsonObject.escape(routerModelA.getRoutingTableModels().toString()));
+            Object obj = JSONValue.parse(routerModelA.getRoutingTableModels().toString());
+            JSONArray array = new JSONArray(routerModelA.getRoutingTableModels().toString());
+            System.out.println(obj);
+            System.out.println(array);
+            JSONObject obj=new JSONObject();
+            obj.put("name","routerModelA.getRoutingTableModels()");
+            System.out.print(obj);*/
 
             byte[] data = outputStream.toByteArray();
             DatagramPacket sendPacket = new DatagramPacket(data, data.length, IPAddress, 9876);
