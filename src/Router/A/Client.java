@@ -15,6 +15,7 @@ import controller.*;
 import service.RouterService;
 import service.RoutingTable;
 import model.*;
+import org.json.simple.JSONObject;
 
 import java.io.Serializable;
 
@@ -37,7 +38,21 @@ public class Client {
             RoutingTable routingTable = new RoutingTable();
             RouterService routerService = new RouterService();
             List<RoutingTableModel> router_A = new ArrayList<RoutingTableModel>();
+            // System.out.println(router_A ); // array
             routingTable.createdRoutingTable(router_A, "Router_A.txt");
+
+            /*
+                for(int i=0;i<router_A.size();i++){
+                    System.out.println(router_A.get(i).getNext_router() );
+                    System.out.println(router_A.get(i).getDest_sub()) ;
+                    System.out.println(router_A.get(i).getHops_to_dest()) ;
+                }
+
+                System.out.println(router_A.get(0) );
+                System.out.println(router_A.get(0).getNext_router() );
+                System.out.println(router_A.size());
+            */
+
             List<RouterModel> routerList = new ArrayList<RouterModel>();
             RouterModel routerModelA = new RouterModel(router_A,"Router A", "9091");
             List<Neighbor> neighbors_A = new ArrayList<Neighbor>();
@@ -45,30 +60,75 @@ public class Client {
             //neighbors_A.add(new Neighbor(routerModelC.getName(), routerModelC.getPort(), routerModelC.getRoutingTableModels()));
             // neighbors_A.add(new Neighbor(routerModelF.getName(), routerModelF.getPort(), routerModelF.getRoutingTableModels()));
 
+
+
+            System.out.println(0); // array
+            System.out.println(router_A ); // array
+            System.out.println(routerModelA ); // array
             System.out.println(routerModelA.getRoutingTableModels());
+            System.out.println(neighbors_A);
+            System.out.println(routerList);
+            System.out.println(5);
+
+            // Print Routing table
+            System.out.println(routerModelA.getName() );
+            System.out.println(routerModelA.getPort() );
+            System.out.println(routerModelA.getRoutingTableModels() );
+            System.out.println(routerModelA.getRoutingTableModels().size() );
+            for(int i=0;i<routerModelA.getRoutingTableModels().size();i++){
+                System.out.println(routerModelA.getRoutingTableModels().get(i).getHops_to_dest() );
+                System.out.println(routerModelA.getRoutingTableModels().get(i).getNext_router());
+                System.out.println(routerModelA.getRoutingTableModels().get(i).getDest_sub() );
+            }
+           // int PortRouterModelA = Integer.parseInt(routerModelA.getPort());
+            Data dataSentSocket= new Data(  routerModelA.getPort(),routerModelA.getName() );
+            System.out.println(55);
+            System.out.println(dataSentSocket);
+            System.out.println(66);
+
+
             routerService.addNeighbor(routerModelA, neighbors_A);
             routerList.add(routerModelA);
             routingTable.printRouterList((routerList));
-
             Object object = routerModelA.getRoutingTableModels();
-            System.out.println(object.getClass().getName());
+
+
+     /*       System.out.println(object.getClass().getName());
+            Socket = new DatagramSocket();
+            InetAddress IPAddress = InetAddress.getByName("localhost");
+            byte[] incomingData = new byte[1024];
+
+
+           ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            //outputStream.write(routerModelA.getRoutingTableModels());
+            ObjectOutputStream os = new ObjectOutputStream(outputStream);
+
+            //  os.writeObject(student);
+            System.out.println(1);
+            System.out.println( routerModelA.getRoutingTableModels().toString());
+           // os.writeObject(routerModelA.getRoutingTableModels().toString());
+            // os.writeObject(object);*/
 
             Socket = new DatagramSocket();
             InetAddress IPAddress = InetAddress.getByName("localhost");
             byte[] incomingData = new byte[1024];
-/*            Student student = new Student(1, "Bijoy", "Kerala");
-            System.out.println("student");
-            System.out.println(student);*/
-
+           // Student student = new Student(1, "Bijoy", "Kerala");
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            //outputStream.write(routerModelA.getRoutingTableModels());
             ObjectOutputStream os = new ObjectOutputStream(outputStream);
-            //  os.writeObject(student);
-            System.out.println(1);
-            System.out.println( routerModelA.getRoutingTableModels().toString());
-            os.writeObject(routerModelA.getRoutingTableModels().toString());
-            // os.writeObject(object);
+            os.writeObject(dataSentSocket);
+            byte[] data = outputStream.toByteArray();
+            //os.writeObject(dataSentSocket);
             System.out.println(2);
+
+
+/*
+            Map <String, RouterModel> map = new HashMap <String, RouterModel> ();
+            map.put ("routing", routerModelA);
+            //Convert json to String type
+            JSONObject json = new JSONObject(map);
+            System.out.println();
+*/
+
 
 /*            System.out.println(1);
             System.out.println( routerModelA.getRoutingTableModels().toString());
@@ -82,7 +142,7 @@ public class Client {
             obj.put("name","routerModelA.getRoutingTableModels()");
             System.out.print(obj);*/
 
-            byte[] data = outputStream.toByteArray();
+            //byte[] data = outputStream.toByteArray();
             DatagramPacket sendPacket = new DatagramPacket(data, data.length, IPAddress, 9876);
             Socket.send(sendPacket);
             System.out.println("Message sent from client");

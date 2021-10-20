@@ -1,7 +1,4 @@
-package Router.A;
-
-import model.RouterModel;
-import model.RoutingTableModel;
+package Router.A.test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -10,15 +7,11 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-// how to http://www.coderpanda.com/java-socket-programming-transferring-java-object-through-socket-using-udp/
-public class Server {
+public class UDPSocketServer {
     DatagramSocket socket = null;
 
-    public Server() {
+    public UDPSocketServer() {
 
     }
 
@@ -34,23 +27,12 @@ public class Server {
                 ByteArrayInputStream in = new ByteArrayInputStream(data);
                 ObjectInputStream is = new ObjectInputStream(in);
                 try {
-
-
-                   System.out.println(is.readObject());
-                   System.out.println(0);
-                   Data dataSender= (Data) is.readObject();
-                    System.out.println(1);
-                   System.out.println(dataSender);
-
-                    System.out.println(2);
-                } catch (Exception e) {
-                    System.out.println("error");
-                    System.out.println(e);
-                    //e.printStackTrace();
+                    Student student = (Student) is.readObject();
+                    System.out.println("Student object received = "+student);
+                    System.out.println(student.getAddressLine());
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
-
-
-
                 InetAddress IPAddress = incomingPacket.getAddress();
                 int port = incomingPacket.getPort();
                 String reply = "Thank you for the message";
@@ -58,19 +40,21 @@ public class Server {
                 DatagramPacket replyPacket =
                         new DatagramPacket(replyBytea, replyBytea.length, IPAddress, port);
                 socket.send(replyPacket);
-                //Thread.sleep(2000);
-                // System.exit(0);
+                Thread.sleep(2000);
+                System.exit(0);
             }
 
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException i) {
             i.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        Server server = new Server();
+        UDPSocketServer server = new UDPSocketServer();
         server.createAndListenSocket();
     }
 }
