@@ -1,24 +1,25 @@
 package Router.C;
 
-import Router.B.ConfigRouter;
-import Router.B.SocketData;
-import Socket.SocketClient;
+import Socket_RIP.ConfigRouter;
+import Socket_RIP.Socket_RIP_Client;
 import model.Neighbor;
 import model.RouterModel;
 import model.RoutingTableModel;
 import service.RouterService;
 import service.RoutingTable;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
+
     public static void main(String[] args) {
         // config
-        SocketClient  socketClient =new SocketClient();
+        Socket_RIP_Client socketClient =new Socket_RIP_Client();
         ConfigRouter configRouter =new ConfigRouter();
+        configRouter.setRouterFile("Router_C.txt");
+        configRouter.setRouterName("Router_C");
+        configRouter.setPort(9093);
 
         //GetDAta
         RoutingTable routingTable = new RoutingTable();

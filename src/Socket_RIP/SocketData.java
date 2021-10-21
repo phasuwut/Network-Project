@@ -1,10 +1,10 @@
-package Router.B;
-import model.RouterModel;
+package Socket_RIP;
+
 import model.RoutingTableModel;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.ArrayList;
+
 public class SocketData implements Serializable  {
 
 

@@ -1,8 +1,4 @@
-package Socket;
-
-import Router.B.ConfigRouter;
-import Router.B.SocketData;
-
+package Socket_RIP;
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
@@ -10,10 +6,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.List;
 
-public class SocketServer {
-    public void  SocketServer(){
-
-    }
+public class Socket_RIP_Server {
+    public void  Socket_RIP_Server(){}
     public void Response(ConfigRouter configRouter){
         try {
             String reply = "";
@@ -30,7 +24,7 @@ public class SocketServer {
                 try {
 
                     System.out.println(0);
-                    List<Router.B.SocketData> listOfMessages = (List<SocketData>) is.readObject();
+                    List<SocketData> listOfMessages = (List<SocketData>) is.readObject();
 
                     // SocketData socketData=  (SocketData) is.readObject();
                     System.out.println(1);

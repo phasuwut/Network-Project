@@ -1,27 +1,18 @@
-package Socket;
+package Socket_RIP;
 
-import Router.B.ConfigRouter;
-import Router.B.SocketData;
+
 import model.RoutingTableModel;
-
-import model.Neighbor;
-import model.RouterModel;
-import model.RoutingTableModel;
-import service.RouterService;
-import service.RoutingTable;
-import java.io.*;
-
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
-import java.net.*;
-import java.util.*;
-import java.io.Serializable;
 
-public class SocketClient {
+public class Socket_RIP_Client {
     DatagramSocket Socket;
-    public void Client(){
+    public void Socket_RIP_Client(){
 
     }
 

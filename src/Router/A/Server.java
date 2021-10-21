@@ -1,78 +1,16 @@
 package Router.A;
 
-import model.RouterModel;
-import model.RoutingTableModel;
+import Socket_RIP.ConfigRouter;
+import Socket_RIP.Socket_RIP_Server;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-// how to http://www.coderpanda.com/java-socket-programming-transferring-java-object-through-socket-using-udp/
 public class Server {
-    DatagramSocket socket = null;
-
-    public Server() {
-
-    }
-
-    public void createAndListenSocket() {
-        try {
-            socket = new DatagramSocket(9876);
-            byte[] incomingData = new byte[1024];
-
-            while (true) {
-                DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
-                socket.receive(incomingPacket);
-                byte[] data = incomingPacket.getData();
-                ByteArrayInputStream in = new ByteArrayInputStream(data);
-                ObjectInputStream is = new ObjectInputStream(in);
-                try {
-
-                    System.out.println(0);
-                    Data dataSender= (Data) is.readObject();
-                    System.out.println(1);
-                    System.out.println(dataSender);
-                    System.out.println(dataSender.getRouterName());
-                    System.out.println(dataSender.toString());
-
-                    System.out.println(2);
-
-
-                } catch (Exception e) {
-                    System.out.println("error");
-                    System.out.println(e);
-                    //e.printStackTrace();
-                }
-
-
-
-                InetAddress IPAddress = incomingPacket.getAddress();
-                int port = incomingPacket.getPort();
-                String reply = "Thank you for the message";
-                byte[] replyBytea = reply.getBytes();
-                DatagramPacket replyPacket =
-                        new DatagramPacket(replyBytea, replyBytea.length, IPAddress, port);
-                socket.send(replyPacket);
-                //Thread.sleep(2000);
-                // System.exit(0);
-            }
-
-        } catch (SocketException e) {
-            e.printStackTrace();
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) {
-        Server server = new Server();
-        server.createAndListenSocket();
+        ConfigRouter configRouter =new ConfigRouter();
+        configRouter.setRouterFile("Router_A.txt");
+        configRouter.setRouterName("Router_A");
+        configRouter.setPort(9091);
+
+        Socket_RIP_Server socketServer=new Socket_RIP_Server();
+        socketServer.Response(configRouter);
     }
 }

@@ -1,24 +1,18 @@
 package Router.C;
 
-
-import Router.B.ConfigRouter;
-import Router.B.SocketData;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.List;
-
-import Socket.SocketServer;
+import Socket_RIP.ConfigRouter;
+import Socket_RIP.Socket_RIP_Server;
 
 public class Server {
     public static void main(String[] args) {
-        Router.B.ConfigRouter configRouter =new ConfigRouter();
-        SocketServer socketServer=new SocketServer();
-        socketServer.Response(configRouter);
+
+            ConfigRouter configRouter =new ConfigRouter();
+            configRouter.setRouterFile("Router_C.txt");
+            configRouter.setRouterName("Router_C");
+            configRouter.setPort(9093);
+
+            Socket_RIP_Server socketServer=new Socket_RIP_Server();
+            socketServer.Response(configRouter);
+
     }
 }
