@@ -18,7 +18,7 @@ public class Client {
         ConfigRouter configRouter =new ConfigRouter();
         configRouter.setRouterFile("Router_A.txt");
         configRouter.setRouterName("Router_A");
-        configRouter.setPort(9091);
+        configRouter.setPort(9090);
 
         //GetDAta
         RoutingTable routingTable = new RoutingTable();

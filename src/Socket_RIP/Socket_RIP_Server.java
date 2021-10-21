@@ -10,8 +10,8 @@ public class Socket_RIP_Server {
     public void  Socket_RIP_Server(){}
     public void Response(ConfigRouter configRouter){
         try {
+            System.out.println(configRouter);
             String reply = "";
-
             DatagramSocket socket = null;
             socket = new DatagramSocket(configRouter.getPort());
             byte[] incomingData = new byte[1024];
@@ -26,11 +26,8 @@ public class Socket_RIP_Server {
                     System.out.println(0);
                     List<SocketData> listOfMessages = (List<SocketData>) is.readObject();
 
-                    // SocketData socketData=  (SocketData) is.readObject();
-                    System.out.println(1);
                     System.out.println(listOfMessages);
                     for(int i=0;i<listOfMessages.size();i++){
-
                         System.out.println(listOfMessages.get(i).getRouterName());
                         System.out.println(listOfMessages.get(i).getRouterPort());
                         System.out.println(listOfMessages.get(i).getRoutingTableModels());

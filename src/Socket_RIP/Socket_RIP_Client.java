@@ -18,6 +18,7 @@ public class Socket_RIP_Client {
 
     public void Send(ConfigRouter configRouter , List<RoutingTableModel> routingTableModels) {
         try{
+
             // เตรียนข้อมูลที่จะส่ง
             List<SocketData> messages = new ArrayList<>();
             messages.add(new SocketData(configRouter.getPort() , configRouter.getRouterName() ,routingTableModels));
