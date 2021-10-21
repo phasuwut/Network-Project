@@ -26,8 +26,10 @@ public class UDPSocketClient {
             ObjectOutputStream os = new ObjectOutputStream(outputStream);
             os.writeObject(student);
             byte[] data = outputStream.toByteArray();
+            System.out.println(data);
             DatagramPacket sendPacket = new DatagramPacket(data, data.length, IPAddress, 9876);
             Socket.send(sendPacket);
+
             System.out.println("Message sent from client");
             DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
             Socket.receive(incomingPacket);

@@ -112,13 +112,15 @@ public class Client {
             Socket = new DatagramSocket();
             InetAddress IPAddress = InetAddress.getByName("localhost");
             byte[] incomingData = new byte[1024];
-           // Student student = new Student(1, "Bijoy", "Kerala");
+
+
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(outputStream);
             os.writeObject(dataSentSocket);
             byte[] data = outputStream.toByteArray();
             //os.writeObject(dataSentSocket);
             System.out.println(2);
+
 
 
 /*

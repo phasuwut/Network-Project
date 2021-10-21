@@ -21,13 +21,18 @@ public class UDPSocketServer {
             byte[] incomingData = new byte[1024];
 
             while (true) {
+
                 DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
                 socket.receive(incomingPacket);
                 byte[] data = incomingPacket.getData();
                 ByteArrayInputStream in = new ByteArrayInputStream(data);
                 ObjectInputStream is = new ObjectInputStream(in);
+
                 try {
+                    System.out.println( 1);
                     Student student = (Student) is.readObject();
+                    System.out.println( 2);
+                   // System.out.println( is.readObject().toString());
                     System.out.println("Student object received = "+student);
                     System.out.println(student.getAddressLine());
                 } catch (ClassNotFoundException e) {

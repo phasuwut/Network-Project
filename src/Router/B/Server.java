@@ -1,7 +1,6 @@
-package Router.A;
+package Router.B;
 
-import model.RouterModel;
-import model.RoutingTableModel;
+import Router.A.Data;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -9,25 +8,16 @@ import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-// how to http://www.coderpanda.com/java-socket-programming-transferring-java-object-through-socket-using-udp/
 public class Server {
-    DatagramSocket socket = null;
-
-    public Server() {
-
-    }
-
-    public void createAndListenSocket() {
+    public static void main(String[] args) {
         try {
-            socket = new DatagramSocket(9876);
-            byte[] incomingData = new byte[1024];
+            ConfigRouter configRouter =new ConfigRouter();
 
-            while (true) {
+            DatagramSocket socket = null;
+            socket = new DatagramSocket(configRouter.getPort());
+            byte[] incomingData = new byte[1024];
+            while (true){
                 DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
                 socket.receive(incomingPacket);
                 byte[] data = incomingPacket.getData();
@@ -36,12 +26,9 @@ public class Server {
                 try {
 
                     System.out.println(0);
-                    Data dataSender= (Data) is.readObject();
+                    SocketData socketData= (SocketData) is.readObject();
                     System.out.println(1);
-                    System.out.println(dataSender);
-                    System.out.println(dataSender.getRouterName());
-                    System.out.println(dataSender.toString());
-
+                    System.out.println(socketData.toString());
                     System.out.println(2);
 
 
@@ -50,9 +37,6 @@ public class Server {
                     System.out.println(e);
                     //e.printStackTrace();
                 }
-
-
-
                 InetAddress IPAddress = incomingPacket.getAddress();
                 int port = incomingPacket.getPort();
                 String reply = "Thank you for the message";
@@ -63,16 +47,12 @@ public class Server {
                 //Thread.sleep(2000);
                 // System.exit(0);
             }
-
-        } catch (SocketException e) {
-            e.printStackTrace();
-        } catch (IOException i) {
-            i.printStackTrace();
+        }
+        catch (Exception e) {
+            System.out.println("error");
+            System.out.println(e);
+            //e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        Server server = new Server();
-        server.createAndListenSocket();
-    }
 }
+
