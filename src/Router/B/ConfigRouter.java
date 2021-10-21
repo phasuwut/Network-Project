@@ -10,9 +10,9 @@ public class ConfigRouter {
     public void ConfigRouter(){
 
     }
-    static int port=9093;
-    static String routerName="Router_C";
-    static String routerFile="Router_C.txt";
+    static int port=9092;
+    static String routerName="Router_B";
+    static String routerFile="Router_B.txt";
     static String folder="Data/";
 
     public int getPort(){

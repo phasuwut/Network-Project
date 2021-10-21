@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.net.*;
 import java.util.*;
+import java.io.Serializable;
 
 public class Client {
 
@@ -36,13 +37,16 @@ public class Client {
             List<Neighbor> neighbors_B = new ArrayList<Neighbor>();
             System.out.println(routerModel ); // array
 
-            //int PortRouter = Integer.parseInt( routerModel.getPort());
-            SocketData socketData=new SocketData(configRouter.getPort() , configRouter.getRouterName() );
+
+            // เตรียนข้อมูลที่จะส่ง
+            List< SocketData> messages2 = new ArrayList<>();
+            messages2.add(new SocketData(configRouter.getPort() , configRouter.getRouterName() ,routerModel.getRoutingTableModels()));
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(outputStream);
-            os.writeObject(socketData);
+            os.writeObject(messages2);
+
+            // sending
             byte[] data = outputStream.toByteArray();
-            System.out.println(2);
             byte[] incomingData = new byte[1024];
             DatagramSocket Socket;
             Socket = new DatagramSocket();
@@ -50,6 +54,7 @@ public class Client {
             DatagramPacket sendPacket = new DatagramPacket(data, data.length, IPAddress, configRouter.getPort());
             Socket.send(sendPacket);
 
+            //response
             System.out.println("Message sent from client");
             DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
             Socket.receive(incomingPacket);
@@ -65,3 +70,4 @@ public class Client {
         }
     }
 }
+

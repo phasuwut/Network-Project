@@ -8,10 +8,13 @@ import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
     public static void main(String[] args) {
         try {
+            String reply = "";
             ConfigRouter configRouter =new ConfigRouter();
 
             DatagramSocket socket = null;
@@ -26,32 +29,45 @@ public class Server {
                 try {
 
                     System.out.println(0);
-                    SocketData socketData= (SocketData) is.readObject();
-                    System.out.println(1);
-                    System.out.println(socketData.toString());
-                    System.out.println(2);
+                    List<SocketData> listOfMessages = (List<SocketData>) is.readObject();
 
+                   // SocketData socketData=  (SocketData) is.readObject();
+                    System.out.println(1);
+                    System.out.println(listOfMessages);
+                    for(int i=0;i<listOfMessages.size();i++){
+
+                        System.out.println(listOfMessages.get(i).getRouterName());
+                        System.out.println(listOfMessages.get(i).getRouterPort());
+                        System.out.println(listOfMessages.get(i).getRoutingTableModels());
+
+                        for(int j=0;j<listOfMessages.get(i).getRoutingTableModels().size();j++){
+                            System.out.println("**********");
+                            System.out.println(listOfMessages.get(i).getRoutingTableModels().get(j).getDest_sub());
+                            System.out.println(listOfMessages.get(i).getRoutingTableModels().get(j).getNext_router());
+                            System.out.println(listOfMessages.get(i).getRoutingTableModels().get(j).getHops_to_dest());
+                        }
+                        System.out.println(" ");
+                    }
+                    System.out.println(2);
+                    reply="ok";
 
                 } catch (Exception e) {
                     System.out.println("error");
                     System.out.println(e);
-                    //e.printStackTrace();
+                    reply="error";
                 }
+
+                // responst to clients
                 InetAddress IPAddress = incomingPacket.getAddress();
                 int port = incomingPacket.getPort();
-                String reply = "Thank you for the message";
                 byte[] replyBytea = reply.getBytes();
-                DatagramPacket replyPacket =
-                        new DatagramPacket(replyBytea, replyBytea.length, IPAddress, port);
+                DatagramPacket replyPacket = new DatagramPacket(replyBytea, replyBytea.length, IPAddress, port);
                 socket.send(replyPacket);
-                //Thread.sleep(2000);
-                // System.exit(0);
             }
         }
         catch (Exception e) {
             System.out.println("error");
             System.out.println(e);
-            //e.printStackTrace();
         }
     }
 }
