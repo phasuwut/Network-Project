@@ -52,7 +52,7 @@ public static void main(String[] args) {
     RouterModel routerModel = new RouterModel(router,"Router C", 9093);
 
     NeighborService neighborService = new NeighborService();
-    String[] myNeighbors = {"A", "D"};
+    String[] myNeighbors = {"A", "D", "G"};
     neighbors = neighborService.addNeighborToRouter(myNeighbors);
 
     routerService.addNeighbor(routerModel, neighbors);
