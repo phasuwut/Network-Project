@@ -1,6 +1,5 @@
 package Router.B;
 
-import Socket_RIP.ConfigRouter;
 import Socket_RIP.Socket_RIP_Server;
 import model.Neighbor;
 import model.RouterModel;
@@ -12,17 +11,7 @@ import service.RoutingTable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Server {
-//    public static void main(String[] args) {
-//        ConfigRouter configRouter =new ConfigRouter();
-//        configRouter.setRouterFile("Router_B.txt");
-//        configRouter.setRouterName("Router_B");
-//        configRouter.setPort(9092);
-//
-//        Socket_RIP_Server socketServer=new Socket_RIP_Server();
-//        socketServer.Response(configRouter);
-//    }
-
+public class Router_B {
     public static void main(String[] args) {
         RoutingTable routingTable = new RoutingTable();
         RouterService routerService = new RouterService();

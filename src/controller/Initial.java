@@ -5,6 +5,7 @@ import model.RouterModel;
 import model.RoutingTableModel;
 import service.RouterService;
 import service.RoutingTable;
+import service.ServerService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,12 +44,12 @@ public class Initial extends Thread {
 
 
         List<RouterModel> routerList = new ArrayList<RouterModel>();
-        RouterModel routerModelA = new RouterModel(router_A,"Router A", "9091");
-        RouterModel routerModelB = new RouterModel(router_B,"Router B", "9092");
-        RouterModel routerModelC = new RouterModel(router_C,"Router C", "9093");
-        RouterModel routerModelD = new RouterModel(router_D,"Router D", "9094");
-        RouterModel routerModelE = new RouterModel(router_E,"Router E", "9095");
-        RouterModel routerModelF = new RouterModel(router_F,"Router F", "9096");
+        RouterModel routerModelA = new RouterModel(router_A,"Router A", 9091);
+        RouterModel routerModelB = new RouterModel(router_B,"Router B", 9092);
+        RouterModel routerModelC = new RouterModel(router_C,"Router C", 9093);
+        RouterModel routerModelD = new RouterModel(router_D,"Router D", 9094);
+        RouterModel routerModelE = new RouterModel(router_E,"Router E", 9095);
+        RouterModel routerModelF = new RouterModel(router_F,"Router F", 9096);
 
 
         List<Neighbor> neighbors_A = new ArrayList<Neighbor>();
@@ -95,8 +96,16 @@ public class Initial extends Thread {
         routerList.add(routerModelF);
 
         routingTable.printRouterList(routerList);
-        routerService.getCompletedRoutingTable(routerList);
-        routingTable.printRouterList(routerList);
+
+//        ServerService serverService_A = new ServerService();
+
+
+
+
+
+
+//        routerService.getCompletedRoutingTable(routerList);
+//        routingTable.printRouterList(routerList);
 //        routerService.deletedRouter(routerList, "Router D");
 //        routingTable.printRouterList(routerList);
 
