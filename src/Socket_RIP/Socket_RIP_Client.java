@@ -64,7 +64,7 @@ public class Socket_RIP_Client {
 
         try {
             Socket socket = new Socket("localhost", (neighbor.getPort()));
-            System.out.println("Connected! " + neighbor.getName());
+//            System.out.println("Connected! " + neighbor.getName());
 
             RouterService routerService = new RouterService();
 
@@ -76,7 +76,7 @@ public class Socket_RIP_Client {
             DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 
-            System.out.println("Sending string to the ServerSocket");
+//            System.out.println("Sending to the ServerSocket");
 
             // write the message we want to send
             objectOutputStream.writeObject(routingTableModel.getRoutingTableModels());

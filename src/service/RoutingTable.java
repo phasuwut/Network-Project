@@ -52,21 +52,21 @@ public class RoutingTable {
 
         for (int j = 0; j < routerModel.getRoutingTableModels().size(); j++) {
 
-            System.out.printf("|       %-17s|       %-10s|         %-9s|\n", routerModel.getRoutingTableModels().get(j).getDest_sub(), routerModel.getRoutingTableModels().get(j).getNext_router(),
+            System.out.printf("|       %-17s|       %-14s|         %-9s|\n", routerModel.getRoutingTableModels().get(j).getDest_sub(), routerModel.getRoutingTableModels().get(j).getNext_router(),
                     routerModel.getRoutingTableModels().get(j).getHops_to_dest());
         }
         System.out.println("");
-        System.out.println("Neighbor's " + routerModel.getName());
-
-        for (int i = 0; i < routerModel.getNeighbors().size(); i++) {
-
-            System.out.printf("       %-17s\n", routerModel.getNeighbors().get(i).getName());
-            for (int k = 0; k < routerModel.getNeighbors().get(i).getRoutingTableModel().size(); k++){
-                System.out.printf("       %-17s\n", routerModel.getNeighbors().get(i).getRoutingTableModel().get(k));
-
-            }
-            System.out.println("");
-        }
+//        System.out.println("Neighbor's " + routerModel.getName());
+//
+//        for (int i = 0; i < routerModel.getNeighbors().size(); i++) {
+//
+//            System.out.printf("       %-17s\n", routerModel.getNeighbors().get(i).getName());
+//            for (int k = 0; k < routerModel.getNeighbors().get(i).getRoutingTableModel().size(); k++){
+//                System.out.printf("       %-17s\n", routerModel.getNeighbors().get(i).getRoutingTableModel().get(k));
+//
+//            }
+//            System.out.println("");
+//        }
 
     }
 
@@ -100,14 +100,14 @@ public class RoutingTable {
     }
 
     public Boolean compare(List<RoutingTableModel> routingTableModel_old, List<RoutingTableModel> routingTableModel_new){
-        System.out.println("routingTableModel_old " + routingTableModel_old.toString());
-        System.out.println("routingTableModel_new " + routingTableModel_new.toString());
+//        System.out.println("routingTableModel_old " + routingTableModel_old.toString());
+//        System.out.println("routingTableModel_new " + routingTableModel_new.toString());
 
         if(routingTableModel_old.toString().equals(routingTableModel_new.toString())){
-            System.out.println("don't updated");
+//            System.out.println("don't updated");
             return true;
         } else{
-            System.out.println("updated");
+//            System.out.println("updated");
             return false;
         }
     }

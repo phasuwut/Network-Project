@@ -106,13 +106,13 @@ public class Socket_RIP_Server {
                 // read the message from the socket
                 String routerName = dataInputStream.readUTF();
                 RoutingTable routingTable = new RoutingTable();
-                System.out.println("---------------------------------" + routerName + " online -----------------------");
-                System.out.println(listOfMessages.toString());
+                System.out.println("---------------------------------" + routerName + " update -----------------------");
+//                System.out.println(listOfMessages.toString());
 
 //                routingTable.printRoutingTable(listOfMessages,routerName);
                 for (int i = 0;i < routerModel.getNeighbors().size(); i++){
-                    System.out.println(routerModel.getNeighbors().get(i).getName());
-                    System.out.println(routerName);
+//                    System.out.println(routerModel.getNeighbors().get(i).getName());
+//                    System.out.println(routerName);
 
                     if( routerModel.getNeighbors().get(i).getName().equals(routerName)){
                         if(routingTable.compare(routerModel.getNeighbors().get(i).getRoutingTableModel(),listOfMessages)){ // เพื่อนบ้านไม่ได้ ไม่อัพเดท  up
