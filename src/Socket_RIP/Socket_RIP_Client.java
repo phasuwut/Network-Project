@@ -27,7 +27,9 @@ public class Socket_RIP_Client {
             // เตรียนข้อมูลที่จะส่ง
             List<SocketData> messages = new ArrayList<>();
             messages.add(new SocketData(configRouter.getPort(), configRouter.getRouterName(), routingTableModels));
+            System.out.println( routingTableModels);
             System.out.println(messages);
+
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ObjectOutputStream os = new ObjectOutputStream(outputStream);
             os.writeObject(messages);
@@ -44,14 +46,29 @@ public class Socket_RIP_Client {
             System.out.println("Message sent from client");
 
 
-            DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
+            Time time=new Time();
+            time.setInterval(() ->upStatus(configRouter,routingTableModels),30000);
+
+/*            DatagramPacket incomingPacket = new DatagramPacket(incomingData, incomingData.length);
             Socket.receive(incomingPacket);
             String response = new String(incomingPacket.getData());
-            System.out.println("Response from server:" + response);
+            System.out.println("Response from server:" + response);*/
         } catch (Exception e) {
             System.out.println("error");
             System.out.println(e);
             //e.printStackTrace();
+        }
+    }
+    public void upStatus(ConfigRouter configRouter,List<RoutingTableModel> routingTableModels){
+        while (true){
+            List<Status> messagesUpdate = new ArrayList<>();
+            messagesUpdate.add(new Status(configRouter.getPort(),configRouter.getRouterName()));
+            System.out.println(routingTableModels.size());
+            for(int i=0;i<routingTableModels.size();i++){
+                System.out.println(routingTableModels.get(i).getDest_sub());
+                System.out.println(" ");
+            }
+           // System.out.println(messagesUpdate);
         }
     }
 
