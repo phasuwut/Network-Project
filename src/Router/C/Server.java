@@ -9,7 +9,7 @@ public class Server {
             ConfigRouter configRouter =new ConfigRouter();
             configRouter.setRouterFile("Router_C.txt");
             configRouter.setRouterName("Router_C");
-            configRouter.setPort(9093);
+            configRouter.setPort(9091);
 
             Socket_RIP_Server socketServer=new Socket_RIP_Server();
             socketServer.Response(configRouter);
