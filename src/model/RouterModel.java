@@ -8,7 +8,7 @@ public class RouterModel {
 
     private String name;
 
-    private String port;
+    private Integer port;
 
     private List<Neighbor> neighbors;
 
@@ -30,11 +30,11 @@ public class RouterModel {
         this.name = name;
     }
 
-    public String getPort() {
+    public Integer getPort() {
         return port;
     }
 
-    public void setPort(String port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 
@@ -46,7 +46,7 @@ public class RouterModel {
         this.neighbors = neighbors;
     }
 
-    public RouterModel(List<RoutingTableModel> routingTableModels, String name, String port) {
+    public RouterModel(List<RoutingTableModel> routingTableModels, String name, Integer port) {
         this.routingTableModels = routingTableModels;
         this.name = name;
         this.port = port;

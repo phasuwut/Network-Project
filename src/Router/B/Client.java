@@ -26,7 +26,7 @@ public class Client {
         List<RoutingTableModel> router = new ArrayList<RoutingTableModel>();
         routingTable.createdRoutingTable(router, configRouter.getFile());
         List<RouterModel> routerList = new ArrayList<RouterModel>();
-        RouterModel routerModel = new RouterModel(router,configRouter.getRouterName(),  Integer.toString(configRouter.getPort()) );
+        RouterModel routerModel = new RouterModel(router,configRouter.getRouterName(),  configRouter.getPort());
         List<Neighbor> neighbors_B = new ArrayList<Neighbor>();
 
         // socket

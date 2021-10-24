@@ -51,4 +51,9 @@ public class ConfigRouter {
         return folder;
     }
 
+    @Override
+    public String toString() {
+        return "routerName = " + routerName + ", port = " + routerPort ;
+    }
+
 }

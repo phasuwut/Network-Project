@@ -1,12 +1,21 @@
 package Socket_RIP;
-import java.io.ByteArrayInputStream;
-import java.io.ObjectInputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
+import model.RouterModel;
+import model.RoutingTableModel;
+import service.ClientService;
+import service.RouterService;
+import service.RoutingTable;
+
+import java.io.*;
+import java.net.*;
+import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class Socket_RIP_Server {
+
+
+
     public void  Socket_RIP_Server(){}
     public void Response(ConfigRouter configRouter){
         try {
@@ -61,5 +70,92 @@ public class Socket_RIP_Server {
             System.out.println("error");
             System.out.println(e);
         }
+    }
+
+    public void waitingForClient(RouterModel routerModel){
+
+
+
+
+        try {
+//            Socket socket = new Socket(routerModel.getName(), parseInt(routerModel.getPort()));
+
+            ServerSocket ss = new ServerSocket((routerModel.getPort()));
+
+            System.out.println("ServerSocket awaiting connections...");
+
+            for(int i = 0; i < routerModel.getNeighbors().size(); i++){
+
+
+                Socket_RIP_Client socket_RIP_client = new Socket_RIP_Client();
+                socket_RIP_client.sendToServer(routerModel.getNeighbors().get(i), routerModel);
+            }
+
+
+            while (true) {
+                Socket socket = ss.accept(); // blocking call, this will wait until a connection is attempted on this port.
+                System.out.println("Connection from " + socket + "!");
+                // get the input stream from the connected socket
+                InputStream inputStream = socket.getInputStream();
+                // create a DataInputStream so we can read data from it.
+                DataInputStream dataInputStream = new DataInputStream(inputStream);
+                ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+
+
+                List<RoutingTableModel> listOfMessages = (List<RoutingTableModel>) objectInputStream.readObject();
+                // read the message from the socket
+                String routerName = dataInputStream.readUTF();
+                RoutingTable routingTable = new RoutingTable();
+                System.out.println("---------------------------------" + routerName + " update -----------------------");
+//                System.out.println(listOfMessages.toString());
+
+//                routingTable.printRoutingTable(listOfMessages,routerName);
+                for (int i = 0;i < routerModel.getNeighbors().size(); i++){
+//                    System.out.println(routerModel.getNeighbors().get(i).getName());
+//                    System.out.println(routerName);
+
+                    if( routerModel.getNeighbors().get(i).getName().equals(routerName)){
+                        if(routingTable.compare(routerModel.getNeighbors().get(i).getRoutingTableModel(),listOfMessages)){ // เพื่อนบ้านไม่ได้ ไม่อัพเดท  up
+                            RouterService routerService = new RouterService();
+
+                            routerService.updateRoutingTableWhenNeighborOnline(routerModel.getRoutingTableModels(), listOfMessages,routerName); // อัพเดทตัวเอง
+//                            routerService.tellNeighborToHaveUpdate(routerModel); // update ตารางเพื่อนบ้าน
+
+
+                            routingTable.printRouterModel(routerModel);
+
+
+                        }
+                        else{ // เพื่อนบ้านมีอัพเดท
+                            routerModel.getNeighbors().get(i).setRoutingTableModel(listOfMessages); // เปลี่ยนเพื่อนบ้าน
+                            RouterService routerService = new RouterService();
+
+                            routerService.updateRoutingTableWhenNeighborOnline(routerModel.getRoutingTableModels(), listOfMessages,routerName); // อัพเดทตัวเอง
+                            routerService.tellNeighborToHaveUpdate(routerModel);
+                            routingTable.printRouterModel(routerModel);
+
+//                            routerService.tellNeighborToHaveUpdate(routerModel);
+                            //        routerService.updateNeighborRoutingTable(routerList, routerModelB); // update ตารางเพื่อนบ้าน
+//                            for(int j = 0; j < routerModel.getNeighbors().size(); j++){
+//
+//                                Socket_RIP_Client socket_RIP_client = new Socket_RIP_Client();
+//                                socket_RIP_client.sendToServer(routerModel.getNeighbors().get(i), routerModel);
+//                            }
+
+                        }
+
+                    }
+                }
+
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("error 555");
+            System.out.println(e);
+        }
+
+
+
     }
 }
