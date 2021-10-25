@@ -1,5 +1,6 @@
 package Router.B;
 
+import Socket_RIP.Socket_RIP_Client;
 import Socket_RIP.Socket_RIP_Server;
 import model.Neighbor;
 import model.RouterModel;
@@ -10,6 +11,8 @@ import service.RoutingTable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Router_B {
     public static void main(String[] args) {
@@ -29,8 +32,23 @@ public class Router_B {
         routerService.addNeighbor(routerModel, neighbors);
 //            routingTable.printRouterModel(routerModelA);
 
+
+
+        Socket_RIP_Client socketClient = new Socket_RIP_Client();
+
+        Timer myTimer = new Timer();
+        myTimer.schedule(new TimerTask() {
+
+            public void run() {
+                for(int i = 0; i < routerModel.getNeighbors().size(); i++){
+                    socketClient.sendUpdateMessageToServer(routerModel.getNeighbors().get(i),routerModel);
+                }
+
+            }
+
+        }, 0, 30000);
+
         Socket_RIP_Server socketServer = new Socket_RIP_Server();
         socketServer.waitingForClient(routerModel);
-
     }
 }

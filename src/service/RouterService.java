@@ -27,14 +27,17 @@ public class RouterService {
         for (int i = 0; i < router.size(); i++) {
 
             if (router.get(i).getDest_sub().equals(dest_subnet)) {
-//                if (parseInt(router.get(i).getHops_to_dest()) > 1 + parseInt(hop_to_dest)) {
-//                    router.get(i).setNext_router(next_router);
-//                    router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
-//                }
 
-                // count to infinity
-                router.get(i).setNext_router(next_router);
-                router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
+
+
+                if (parseInt(router.get(i).getHops_to_dest()) > 1 + parseInt(hop_to_dest)) {
+                    router.get(i).setNext_router(next_router);
+                    router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
+                }
+
+//                 count to infinity
+//                router.get(i).setNext_router(next_router);
+//                router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
 
 
 

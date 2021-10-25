@@ -1,4 +1,5 @@
 package Socket_RIP;
+import model.Count;
 import model.RouterModel;
 import model.RoutingTableModel;
 import service.ClientService;
@@ -9,6 +10,8 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static java.lang.Integer.parseInt;
 
@@ -73,7 +76,7 @@ public class Socket_RIP_Server {
     }
 
     public void waitingForClient(RouterModel routerModel){
-
+        List<Count> countList = new ArrayList<Count>();
 
 
 
@@ -85,8 +88,8 @@ public class Socket_RIP_Server {
             System.out.println("ServerSocket awaiting connections...");
 
             for(int i = 0; i < routerModel.getNeighbors().size(); i++){
-
-
+//                Count count = new Count();
+                countList.add(new Count(routerModel.getNeighbors().get(i).getName(),0,0,false));
                 Socket_RIP_Client socket_RIP_client = new Socket_RIP_Client();
                 socket_RIP_client.sendToServer(routerModel.getNeighbors().get(i), routerModel);
             }
@@ -94,7 +97,7 @@ public class Socket_RIP_Server {
 
             while (true) {
                 Socket socket = ss.accept(); // blocking call, this will wait until a connection is attempted on this port.
-                System.out.println("Connection from " + socket + "!");
+//                System.out.println("Connection from " + socket + "!");
                 // get the input stream from the connected socket
                 InputStream inputStream = socket.getInputStream();
                 // create a DataInputStream so we can read data from it.
@@ -104,48 +107,80 @@ public class Socket_RIP_Server {
 
                 List<RoutingTableModel> listOfMessages = (List<RoutingTableModel>) objectInputStream.readObject();
                 // read the message from the socket
-                String routerName = dataInputStream.readUTF();
+                String message = dataInputStream.readUTF();
                 RoutingTable routingTable = new RoutingTable();
-                System.out.println("---------------------------------" + routerName + " update -----------------------");
-//                System.out.println(listOfMessages.toString());
 
-//                routingTable.printRoutingTable(listOfMessages,routerName);
-                for (int i = 0;i < routerModel.getNeighbors().size(); i++){
+                if(message.length() == 8){
+                    System.out.println("------------------------ " + message + " has update ----------------------");
+                    for (int i = 0;i < routerModel.getNeighbors().size(); i++){
 //                    System.out.println(routerModel.getNeighbors().get(i).getName());
 //                    System.out.println(routerName);
 
-                    if( routerModel.getNeighbors().get(i).getName().equals(routerName)){
-                        if(routingTable.compare(routerModel.getNeighbors().get(i).getRoutingTableModel(),listOfMessages)){ // เพื่อนบ้านไม่ได้ ไม่อัพเดท  up
-                            RouterService routerService = new RouterService();
+                        if( routerModel.getNeighbors().get(i).getName().equals(message)){
+                            if(routingTable.compare(routerModel.getNeighbors().get(i).getRoutingTableModel(),listOfMessages)){ // เพื่อนบ้านไม่ได้ ไม่อัพเดท  up
+                                RouterService routerService = new RouterService();
 
-                            routerService.updateRoutingTableWhenNeighborOnline(routerModel.getRoutingTableModels(), listOfMessages,routerName); // อัพเดทตัวเอง
+                                routerService.updateRoutingTableWhenNeighborOnline(routerModel.getRoutingTableModels(), listOfMessages,message); // อัพเดทตัวเอง
 //                            routerService.tellNeighborToHaveUpdate(routerModel); // update ตารางเพื่อนบ้าน
 
 
-                            routingTable.printRouterModel(routerModel);
+                                routingTable.printRouterModel(routerModel);
 
 
-                        }
-                        else{ // เพื่อนบ้านมีอัพเดท
-                            routerModel.getNeighbors().get(i).setRoutingTableModel(listOfMessages); // เปลี่ยนเพื่อนบ้าน
-                            RouterService routerService = new RouterService();
+                            }
+                            else{ // เพื่อนบ้านมีอัพเดท
+                                routerModel.getNeighbors().get(i).setRoutingTableModel(listOfMessages); // เปลี่ยนเพื่อนบ้าน
+                                RouterService routerService = new RouterService();
 
-                            routerService.updateRoutingTableWhenNeighborOnline(routerModel.getRoutingTableModels(), listOfMessages,routerName); // อัพเดทตัวเอง
-                            routerService.tellNeighborToHaveUpdate(routerModel);
-                            routingTable.printRouterModel(routerModel);
+                                routerService.updateRoutingTableWhenNeighborOnline(routerModel.getRoutingTableModels(), listOfMessages,message); // อัพเดทตัวเอง
+                                routerService.tellNeighborToHaveUpdate(routerModel);
+                                routingTable.printRouterModel(routerModel);
 
 //                            routerService.tellNeighborToHaveUpdate(routerModel);
-                            //        routerService.updateNeighborRoutingTable(routerList, routerModelB); // update ตารางเพื่อนบ้าน
+                                //        routerService.updateNeighborRoutingTable(routerList, routerModelB); // update ตารางเพื่อนบ้าน
 //                            for(int j = 0; j < routerModel.getNeighbors().size(); j++){
 //
 //                                Socket_RIP_Client socket_RIP_client = new Socket_RIP_Client();
 //                                socket_RIP_client.sendToServer(routerModel.getNeighbors().get(i), routerModel);
 //                            }
 
-                        }
+                            }
 
+                        }
                     }
                 }
+                else{
+                    System.out.println(message);
+                    for(int i = 0; i < routerModel.getNeighbors().size(); i++){
+                        if(routerModel.getNeighbors().get(i).getName().equals(message.split("from ")[1])){
+                            for(int j = 0; j < countList.size(); j++){
+                                if(countList.get(j).getName().equals(message.split("from ")[1])){
+                                    if(countList.get(j).getValue() == 0){
+                                        countList.get(j).setValue(1);
+                                        countList.get(j).setStatus(true);
+                                        countList.get(j).setCount(1);
+                                    }
+
+                                    if(countList.get(j).getValue() == 1){
+                                        countList.get(j).setValue(1);
+                                        countList.get(j).setStatus(true);
+                                        countList.get(j).setCount(countList.get(j).getCount() + 1);
+                                    }
+                                }
+
+
+                            }
+                        }
+                    }
+                    System.out.println(countList.toString());
+
+                }
+
+//                System.out.println(listOfMessages.toString());
+
+//                routingTable.printRoutingTable(listOfMessages,routerName);
+
+
 
             }
 
