@@ -12,7 +12,15 @@ public class RouterModel {
 
     private List<Neighbor> neighbors;
 
+    private Boolean status;
 
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     public List<RoutingTableModel> getRoutingTableModels() {
         return routingTableModels;
@@ -50,10 +58,19 @@ public class RouterModel {
         this.routingTableModels = routingTableModels;
         this.name = name;
         this.port = port;
+        this.status = false;
     }
 
     @Override
     public String toString() {
         return "[name = " + name + ", port =" + port + ", neighbors = " + neighbors +", routingTable = " +routingTableModels +" ]";
     }
+
+//    public RouterModel(List<RoutingTableModel> routingTableModels, String name, Integer port,, Boolean status)
+//        this.routingTableModels = routingTableModels;
+//        this.name = name;
+//        this.port = port;
+//        this.neighbors = neighbors;
+//        this.status = status;
+//    }
 }

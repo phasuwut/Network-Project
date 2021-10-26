@@ -9,6 +9,19 @@ public class Neighbor {
 
     private Integer port;
 
+    private Boolean status;
+
+    public void setPort(Integer port) {
+        this.port = port;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     private List<RoutingTableModel> routingTableModel;
 
@@ -51,11 +64,12 @@ public class Neighbor {
         this.name = name;
         this.port = port;
         this.routingTableModel = routingTableModel;
+        this.status = false;
     }
 
     @Override
     public String toString() {
-        return "[name = " + name + ", port =" + port + ", routingTable = " +routingTableModel +" ]";
+        return "[name = " + name + ", port =" + port + ", routingTable = " +routingTableModel + ", status = " + status + " ]";
     }
 
 

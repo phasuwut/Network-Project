@@ -82,7 +82,7 @@ public class Socket_RIP_Server {
 //            Socket socket = new Socket(routerModel.getName(), parseInt(routerModel.getPort()));
 
             ServerSocket ss = new ServerSocket((routerModel.getPort()));
-
+            routerModel.setStatus(true);
             System.out.println("ServerSocket awaiting connections...");
 
             for(int i = 0; i < routerModel.getNeighbors().size(); i++){
@@ -115,6 +115,7 @@ public class Socket_RIP_Server {
 //                    System.out.println(routerName);
 
                         if( routerModel.getNeighbors().get(i).getName().equals(message)){
+                            routerModel.getNeighbors().get(i).setStatus(true);
                             if(routingTable.compare(routerModel.getNeighbors().get(i).getRoutingTableModel(),listOfMessages)){ // เพื่อนบ้านไม่ได้ ไม่อัพเดท  up
                                 RouterService routerService = new RouterService();
 
@@ -152,8 +153,19 @@ public class Socket_RIP_Server {
                                 if(countList.get(j).getName().equals(message.split("from ")[1])){
 
 //                                    if(countList.get(j).getValue() >= 0){
-                                        countList.get(j).setCount(countList.get(j).getCount() + 1);
-                                        countList.get(j).setValue(countList.get(j).getValue() + 1);
+                                        countList.get(i).setUpdatedTime(System.currentTimeMillis());
+                                        Timer myTimer = new Timer();
+                    myTimer.schedule(new TimerTask() {
+                        NeighborService neighborService = new NeighborService();
+                        public void run() {
+
+                            String name = message.split("from ")[1];
+
+                            System.out.println("-------------------" + name + "---------------------");
+                            neighborService.checkStatusNeighbors(routerModel, countList, name);
+                        }
+
+                    }, 18000);
 
 //                                        countList.get(j).setStatus(true);
 //                                        countList.get(j).setCount(1);
@@ -161,15 +173,13 @@ public class Socket_RIP_Server {
 
 
                                 }
-                                else{
-                                    countList.get(j).setCount(countList.get(j).getCount() + 1);
 
-                                }
 
 
                             }
                         }
                     }
+
 
 //                    Timer myTimer = new Timer();
 //

@@ -10,6 +10,8 @@ public class RoutingTableModel  implements Serializable {
 
     private String  hops_to_dest;
 
+    private String  next_router_state;
+
 
     public String getDest_sub() {
         return dest_sub;
@@ -35,10 +37,25 @@ public class RoutingTableModel  implements Serializable {
         this.hops_to_dest = hops_to_dest;
     }
 
-    public RoutingTableModel(String dest_sub, String next_router, String hops_to_dest) {
+    public String getNext_router_state() {
+        return next_router_state;
+    }
+
+    public void setNext_router_state(String next_router_state) {
+        this.next_router_state = next_router_state;
+    }
+
+//    public RoutingTableModel(String dest_sub, String next_router, String hops_to_dest) {
+//        this.dest_sub = dest_sub;
+//        this.next_router = next_router;
+//        this.hops_to_dest = hops_to_dest;
+//    }
+
+    public RoutingTableModel(String dest_sub, String next_router, String hops_to_dest, String next_router_state) {
         this.dest_sub = dest_sub;
         this.next_router = next_router;
         this.hops_to_dest = hops_to_dest;
+        this.next_router_state = next_router_state;
     }
 
     public RoutingTableModel() {
@@ -47,6 +64,6 @@ public class RoutingTableModel  implements Serializable {
 
     @Override
     public String toString() {
-        return "[destination subnet = " + dest_sub + ", next router = " + next_router + ", hops to dest = " + hops_to_dest +" ]";
+        return "[destination subnet = " + dest_sub + ", next router = " + next_router + ", hops to dest = " + hops_to_dest +  ", next router state = " + hops_to_dest +" ]";
     }
 }

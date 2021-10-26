@@ -34,7 +34,7 @@ public class Router_F {
 //            routingTable.printRouterModel(routerModelA);
         List<Count> countList = new ArrayList<Count>();
         for(int i = 0; i < routerModel.getNeighbors().size(); i++){
-            countList.add(new Count(routerModel.getNeighbors().get(i).getName(),0,0,false));
+            countList.add(new Count(routerModel.getNeighbors().get(i).getName(),null));
 
         }
 
@@ -47,7 +47,7 @@ public class Router_F {
 
             public void run() {
                 for (int i = 0; i < routerModel.getNeighbors().size(); i++) {
-                    socketClient.sendUpdateMessageToServer(routerModel.getNeighbors().get(i), routerModel);
+                    socketClient.sendUpdateMessageToServer(routerModel.getNeighbors().get(i), routerModel, routerModel.getNeighbors());
                 }
 
             }
