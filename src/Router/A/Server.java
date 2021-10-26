@@ -40,7 +40,7 @@ public class Server {
 //            routingTable.printRouterModel(routerModelA);
 
         Socket_RIP_Server socketServer = new Socket_RIP_Server();
-        socketServer.waitingForClient(routerModelA);
+//        socketServer.waitingForClient(routerModelA);
 
         }
 }

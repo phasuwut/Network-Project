@@ -32,6 +32,6 @@ public class ServerService {
 //            routingTable.printRouterModel(routerModelA);
 
             Socket_RIP_Server socketServer = new Socket_RIP_Server();
-            socketServer.waitingForClient(routerModel);
+//            socketServer.waitingForClient(routerModel);
         }
 }

@@ -1,5 +1,6 @@
 package service;
 
+import model.Count;
 import model.Neighbor;
 import model.RouterModel;
 import model.RoutingTableModel;
@@ -48,6 +49,29 @@ public class NeighborService {
         }
 
         return neighbors;
+    }
+
+
+    public void checkStatusNeighbors( List<Count> countList,String name){
+        System.out.println(name + "nameeiei");
+        for(int i = 0 ; i < countList.size(); i++){
+            if(countList.get(i).getName().equals(name)){
+                if (countList.get(i).getValue() == countList.get(i).getCount()){ // เพื่อนบ้านยังไม่ตาย
+                    countList.get(i).setStatus(true); //
+//                    countList.get(i).setCount(0);
+
+//                    countList.get(i).setValue(0);
+                }
+                else if(countList.get(i).getCount() - countList.get(i).getValue() > 6){
+                    countList.get(i).setStatus(false);
+                    countList.get(i).setValue(0);
+                    countList.get(i).setCount(0);
+
+                }
+            }
+        }
+
+
     }
 
 }

@@ -41,14 +41,14 @@ public class RoutingTable {
         System.out.printf("|                    %-41s|\n", "Routing Table in " + routerName);
         System.out.println("|   destination subnet   |   next router   |   hops to dest   |");
         for (int i = 0; i < router.size(); i++) {
-            System.out.printf("|       %-17s|       %-10s|         %-9s|\n", router.get(i).getDest_sub(), router.get(i).getNext_router(), router.get(i).getHops_to_dest());
+            System.out.printf("|       %-17s|       %-14s|         %-9s|\n", router.get(i).getDest_sub(), router.get(i).getNext_router(), router.get(i).getHops_to_dest());
         }
 
     }
 
     public void printRouterModel(RouterModel routerModel) {
-        System.out.printf("|            %-49s|\n", "Routing Table in " + routerModel.getName() + " (Port : " + routerModel.getPort() + ")");
-        System.out.println("|   destination subnet   |   next router   |   hops to dest   |");
+        System.out.printf("|                %-49s|\n", "Routing Table in " + routerModel.getName() + " (Port : " + routerModel.getPort() + ")");
+        System.out.println("|   destination subnet   |      next router    |   hops to dest   |");
 
         for (int j = 0; j < routerModel.getRoutingTableModels().size(); j++) {
 
