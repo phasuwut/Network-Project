@@ -2,9 +2,7 @@ package Socket_RIP;
 import model.Count;
 import model.RouterModel;
 import model.RoutingTableModel;
-import service.ClientService;
-import service.RouterService;
-import service.RoutingTable;
+import service.*;
 
 import java.io.*;
 import java.net.*;
@@ -17,7 +15,7 @@ import static java.lang.Integer.parseInt;
 
 public class Socket_RIP_Server {
 
-
+//    public service.NeighborService neighborService;
 
     public void  Socket_RIP_Server(){}
     public void Response(ConfigRouter configRouter){
@@ -75,8 +73,8 @@ public class Socket_RIP_Server {
         }
     }
 
-    public void waitingForClient(RouterModel routerModel){
-        List<Count> countList = new ArrayList<Count>();
+    public void waitingForClient(RouterModel routerModel, List<Count> countList){
+//        List<Count> countList = new ArrayList<Count>();
 
 
 
@@ -89,7 +87,7 @@ public class Socket_RIP_Server {
 
             for(int i = 0; i < routerModel.getNeighbors().size(); i++){
 //                Count count = new Count();
-                countList.add(new Count(routerModel.getNeighbors().get(i).getName(),0,0,false));
+//                countList.add(new Count(routerModel.getNeighbors().get(i).getName(),0,0,false));
                 Socket_RIP_Client socket_RIP_client = new Socket_RIP_Client();
                 socket_RIP_client.sendToServer(routerModel.getNeighbors().get(i), routerModel);
             }
@@ -110,7 +108,7 @@ public class Socket_RIP_Server {
                 String message = dataInputStream.readUTF();
                 RoutingTable routingTable = new RoutingTable();
 
-                if(message.length() == 8){
+                if(message.length() == 8){ // has update
                     System.out.println("------------------------ " + message + " has update ----------------------");
                     for (int i = 0;i < routerModel.getNeighbors().size(); i++){
 //                    System.out.println(routerModel.getNeighbors().get(i).getName());
@@ -121,7 +119,6 @@ public class Socket_RIP_Server {
                                 RouterService routerService = new RouterService();
 
                                 routerService.updateRoutingTableWhenNeighborOnline(routerModel.getRoutingTableModels(), listOfMessages,message); // อัพเดทตัวเอง
-//                            routerService.tellNeighborToHaveUpdate(routerModel); // update ตารางเพื่อนบ้าน
 
 
                                 routingTable.printRouterModel(routerModel);
@@ -136,12 +133,6 @@ public class Socket_RIP_Server {
                                 routerService.tellNeighborToHaveUpdate(routerModel);
                                 routingTable.printRouterModel(routerModel);
 
-//                            routerService.tellNeighborToHaveUpdate(routerModel);
-                                //        routerService.updateNeighborRoutingTable(routerList, routerModelB); // update ตารางเพื่อนบ้าน
-//                            for(int j = 0; j < routerModel.getNeighbors().size(); j++){
-//
-//                                Socket_RIP_Client socket_RIP_client = new Socket_RIP_Client();
-//                                socket_RIP_client.sendToServer(routerModel.getNeighbors().get(i), routerModel);
 //                            }
 
                             }
@@ -149,32 +140,61 @@ public class Socket_RIP_Server {
                         }
                     }
                 }
-                else{
+                else{ // update status
                     System.out.println(message);
+                    routingTable.printRouterModel(routerModel);
+
                     for(int i = 0; i < routerModel.getNeighbors().size(); i++){
                         if(routerModel.getNeighbors().get(i).getName().equals(message.split("from ")[1])){
                             for(int j = 0; j < countList.size(); j++){
-                                if(countList.get(j).getName().equals(message.split("from ")[1])){
-                                    if(countList.get(j).getValue() == 0){
-                                        countList.get(j).setValue(1);
-                                        countList.get(j).setStatus(true);
-                                        countList.get(j).setCount(1);
-                                    }
 
-                                    if(countList.get(j).getValue() == 1){
-                                        countList.get(j).setValue(1);
-                                        countList.get(j).setStatus(true);
+
+                                if(countList.get(j).getName().equals(message.split("from ")[1])){
+
+//                                    if(countList.get(j).getValue() >= 0){
                                         countList.get(j).setCount(countList.get(j).getCount() + 1);
-                                    }
+                                        countList.get(j).setValue(countList.get(j).getValue() + 1);
+
+//                                        countList.get(j).setStatus(true);
+//                                        countList.get(j).setCount(1);
+//                                    }
+
+
+                                }
+                                else{
+                                    countList.get(j).setCount(countList.get(j).getCount() + 1);
+
                                 }
 
 
                             }
                         }
                     }
-                    System.out.println(countList.toString());
+
+//                    Timer myTimer = new Timer();
+//
+//                    myTimer.schedule(new TimerTask() {
+//                        NeighborService neighborService = new NeighborService();
+//                        public void run() {
+//
+//                            String name = message.split("from ")[1];
+//
+//                            System.out.println("-------------------" + name + "---------------------");
+//                            neighborService.checkStatusNeighbors(countList,name);
+//                            System.out.println(countList.toString());
+//                        }
+//
+//                    }, 18000,18000);
 
                 }
+
+
+
+//                new Timer().schedule(new NewCheckNeighbor(), 0, 1000);
+//
+//                for (int i = 0; i < 3; i++) {
+//                    Thread.sleep(1000);
+//                }
 
 //                System.out.println(listOfMessages.toString());
 

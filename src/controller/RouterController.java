@@ -1,5 +1,6 @@
 package controller;
 
+import service.NewCheckNeighbor;
 import service.ServerService;
 
 import java.io.IOException;
@@ -28,15 +29,11 @@ public class RouterController {
 //        ServerService serverRouter_F= new ServerService();
 //        serverRouter_F.OpenServer("Router_F.txt", "Router F" , 9096, new String[]{"A", "B", "E"});
 
-        Timer myTimer = new Timer();
-        myTimer.schedule(new TimerTask() {
+        new Timer().schedule(new NewCheckNeighbor(), 0, 18000);
 
-            public void run() {
-
-                    timerTick();
-                }
-
-            }, 0, 30000);
+//        for (int i = 0; i < 3; i++) {
+//            Thread.sleep(1000);
+//        }
 
     }
 

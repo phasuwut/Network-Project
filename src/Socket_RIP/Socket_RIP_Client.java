@@ -5,6 +5,7 @@ import model.Neighbor;
 import model.RouterModel;
 import model.RoutingTableModel;
 import service.RouterService;
+import service.RoutingTable;
 
 import java.io.*;
 import java.net.*;
@@ -77,6 +78,15 @@ public class Socket_RIP_Client {
 
         } catch (ConnectException exception) {
             System.out.println("Server " + neighbor.getName() + " is still offline");
+//            System.out.println("Server 12345647");
+//
+//            for (int i = 0; i < routingTableModel.getRoutingTableModels().size(); i++){
+//                if(routingTableModel.getRoutingTableModels().get(i).getNext_router().equals(neighbor.getName())){
+//                    routingTableModel.getRoutingTableModels().remove(i);
+//                    System.out.println("Server 12345647");
+//
+//                }
+//            }
         } catch (IOException ex) {
             System.out.println("Server " + neighbor.getName() + " got disconnected");
         } catch (Exception e) {
@@ -86,6 +96,7 @@ public class Socket_RIP_Client {
     }
 
     public void sendUpdateMessageToServer(Neighbor neighbor, RouterModel routingTableModel) {
+        RoutingTable routingTable = new RoutingTable();
 
 
         try {
@@ -103,6 +114,18 @@ public class Socket_RIP_Client {
 
         } catch (ConnectException exception) {
             System.out.println("Server " + neighbor.getName() + " is still offline");
+//
+//            for (int i = 0; i < routingTableModel.getRoutingTableModels().size(); ){
+//                if(routingTableModel.getRoutingTableModels().get(i).getNext_router().equals(neighbor.getName())){
+//                    routingTableModel.getRoutingTableModels().remove(i);
+//
+//                }
+//                else{
+//                    i++;
+//                }
+//            }
+//            routingTable.printRouterModel(routingTableModel);
+
         } catch (IOException ex) {
             System.out.println("Server " + neighbor.getName() + " got disconnected");
         } catch (Exception e) {
