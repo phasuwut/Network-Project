@@ -34,6 +34,15 @@ public class NeighborService {
                 case "F":
                     neighbors.add(new Neighbor(routerService.getRouter_F().getName(), routerService.getRouter_F().getPort(), routerService.getRouter_F().getRoutingTableModels()));
                     break;
+                case "G":
+                    neighbors.add(new Neighbor(routerService.getRouter_G().getName(), routerService.getRouter_G().getPort(), routerService.getRouter_G().getRoutingTableModels()));
+                    break;
+                case "H":
+                    neighbors.add(new Neighbor(routerService.getRouter_H().getName(), routerService.getRouter_H().getPort(), routerService.getRouter_H().getRoutingTableModels()));
+                    break;
+                case "I":
+                    neighbors.add(new Neighbor(routerService.getRouter_I().getName(), routerService.getRouter_I().getPort(), routerService.getRouter_I().getRoutingTableModels()));
+                    break;
             }
 
         }

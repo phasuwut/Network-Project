@@ -27,10 +27,17 @@ public class RouterService {
         for (int i = 0; i < router.size(); i++) {
 
             if (router.get(i).getDest_sub().equals(dest_subnet)) {
-                if (parseInt(router.get(i).getHops_to_dest()) > 1 + parseInt(hop_to_dest)) {
-                    router.get(i).setNext_router(next_router);
-                    router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
-                }
+//                if (parseInt(router.get(i).getHops_to_dest()) > 1 + parseInt(hop_to_dest)) {
+//                    router.get(i).setNext_router(next_router);
+//                    router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
+//                }
+
+                // count to infinity
+                router.get(i).setNext_router(next_router);
+                router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
+
+
+
 //                else if (parseInt(hop_to_dest) < parseInt(router.get(i).getHops_to_dest())) {
 //                    router.get(i).setNext_router(next_router);
 //                    router.get(i).setHops_to_dest(String.valueOf(parseInt(hop_to_dest)));
@@ -178,6 +185,33 @@ public class RouterService {
         routingTable.createdRoutingTable(router, "Router_F.txt");
 
         RouterModel routerModel = new RouterModel(router, "Router F", 9096);
+        return routerModel;
+    }
+
+    public RouterModel getRouter_G() {
+        RoutingTable routingTable = new RoutingTable();
+        List<RoutingTableModel> router = new ArrayList<RoutingTableModel>();
+        routingTable.createdRoutingTable(router, "Router_G.txt");
+
+        RouterModel routerModel = new RouterModel(router, "Router G", 9097);
+        return routerModel;
+    }
+
+    public RouterModel getRouter_H() {
+        RoutingTable routingTable = new RoutingTable();
+        List<RoutingTableModel> router = new ArrayList<RoutingTableModel>();
+        routingTable.createdRoutingTable(router, "Router_H.txt");
+
+        RouterModel routerModel = new RouterModel(router, "Router H", 9098);
+        return routerModel;
+    }
+
+    public RouterModel getRouter_I() {
+        RoutingTable routingTable = new RoutingTable();
+        List<RoutingTableModel> router = new ArrayList<RoutingTableModel>();
+        routingTable.createdRoutingTable(router, "Router_I.txt");
+
+        RouterModel routerModel = new RouterModel(router, "Router I", 9099);
         return routerModel;
     }
 
