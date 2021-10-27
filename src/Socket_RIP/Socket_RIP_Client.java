@@ -77,24 +77,7 @@ public class Socket_RIP_Client {
 
 
         } catch (ConnectException exception) {
-//            for(int i = 0; i < routingTableModel.getRoutingTableModels().size(); i++){
-//                if(routingTableModel.getRoutingTableModels().get(i).getNext_router().equals(neighbor.getName())){
-//                    routingTableModel.getRoutingTableModels().get(i).setNext_router_state("disconnected");
-//                }
-//            }
-////            routerService.updateRoutingTableWhenNeighborDisconnected(routingTableModel.getRoutingTableModels(), routingTableModel.getRoutingTableModels(),neighbor.getName());
-//
-//            routerService.updateRoutingTableWhenNeighborOnline(routingTableModel.getRoutingTableModels(), neighbor.getRoutingTableModel(), neighbor.getName());
-//            System.out.println("Server " + neighbor.getName() + " is still offline");
-//            System.out.println("Server 12345647");
-//
-//            for (int i = 0; i < routingTableModel.getRoutingTableModels().size(); i++){
-//                if(routingTableModel.getRoutingTableModels().get(i).getNext_router().equals(neighbor.getName())){
-//                    routingTableModel.getRoutingTableModels().remove(i);
-//                    System.out.println("Server 12345647");
-//
-//                }
-//            }
+
         } catch (IOException ex) {
             System.out.println("Server " + neighbor.getName() + " got disconnected");
         } catch (Exception e) {
@@ -123,24 +106,19 @@ public class Socket_RIP_Client {
 
         } catch (ConnectException exception) {
 //            System.out.println("Server " + neighbor.getName() + " is still offline");
+            for(int i = 0; i < routingTableModel.getRoutingTableModels().size(); i++){
+                if(routingTableModel.getRoutingTableModels().get(i).getNext_router().equals(neighbor.getName())){
+                    routingTableModel.getRoutingTableModels().get(i).setNext_router_state("disconnected");
+                }
+            }
 
-//            for(int i = 0; i < routingTableModel.getRoutingTableModels().size(); i++){
-//                if(routingTableModel.getRoutingTableModels().get(i).getNext_router().equals(neighbor.getName())){
-//                    routingTableModel.getRoutingTableModels().get(i).setNext_router_state("disconnected");
-//                }
-//            }
-//
-//            for(int i = 0; i < routingTableModel.getNeighbors().size(); i++){
-//                if(routingTableModel.getNeighbors().get(i).getStatus() == true){
-//
-//                    routerService.updateRoutingTableWhenNeighborDisconnect(routingTableModel.getRoutingTableModels() ,neighbor.getName(), neighbors);
-//
-//                }
-//            }
 
-//            routerService.updateRoutingTableWhenNeighborDisconnected(routingTableModel.getRoutingTableModels(), routingTableModel.getRoutingTableModels(),neighbor.getName());
+//
+//            routerService.updateRoutingTableWhenNeighborDisconnected(neighbor.getRoutingTableModel(), routingTableModel.getRoutingTableModels(), neighbor.getName());
+//            routerService.tellNeighborToHaveUpdate(routingTableModel);
+//            routingTable.printRouterModel(routingTableModel);
+//            routerService.updateRoutingTableWhenNeighborDisconnect(routingTableModel.getRoutingTableModels() ,neighbor.getName(), neighbors);
 
-//            routerService.updateRoutingTableWhenNeighborOnline(routingTableModel.getRoutingTableModels(), neighbor.getRoutingTableModel(), neighbor.getName());
 //
         } catch (IOException ex) {
             System.out.println("Server " + neighbor.getName() + " got disconnected");
@@ -148,5 +126,30 @@ public class Socket_RIP_Client {
             System.out.println("error");
             System.out.println(e);
         }
+    }
+
+    public void myNeighborDisconnect(Neighbor neighbor, String destination_subnet, String fromRouterName) {
+        try {
+            Socket socket = new Socket("localhost", (neighbor.getPort()));
+
+            OutputStream outputStream = socket.getOutputStream();
+            DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+
+
+            objectOutputStream.writeObject(null);
+            dataOutputStream.writeUTF("Delete "+ destination_subnet +" from " + fromRouterName);
+            dataOutputStream.flush(); // send the message
+
+
+        } catch (ConnectException exception) {
+
+        } catch (IOException ex) {
+            System.out.println("Server " + neighbor.getName() + " got disconnected");
+        } catch (Exception e) {
+            System.out.println("error");
+            System.out.println(e);
+        }
+
     }
 }

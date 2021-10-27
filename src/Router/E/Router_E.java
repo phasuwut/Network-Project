@@ -57,14 +57,14 @@ public class Router_E {
         }, 0, 3000);
 
         // check neighbor every 180 sec
-        myTimer.schedule(new TimerTask() {
-
-            public void run() {
-                System.out.println(countList.toString());
-
-            }
-
-        }, 0, 18000);
+//        myTimer.schedule(new TimerTask() {
+//
+//            public void run() {
+//                System.out.println(countList.toString());
+//
+//            }
+//
+//        }, 0, 18000);
 
 
         Socket_RIP_Server socketServer = new Socket_RIP_Server();

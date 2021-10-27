@@ -1,5 +1,6 @@
 package service;
 
+import Socket_RIP.Socket_RIP_Client;
 import model.Count;
 import model.Neighbor;
 import model.RouterModel;
@@ -55,44 +56,59 @@ public class NeighborService {
     public void checkStatusNeighbors(RouterModel routerModel, List<Count> countList, String name) {
         RoutingTable routingTable = new RoutingTable();
         RouterService routerService = new RouterService();
+        Socket_RIP_Client socketClient = new Socket_RIP_Client();
 
-//        for(int i = 0 ; i < countList.size(); i++){
-//            if(countList.get(i).getName().equals(name)){
-//                if (countList.get(i).getValue() == countList.get(i).getCount()){ // เพื่อนบ้านยังไม่ตาย
-//                    countList.get(i).setStatus(true); //
-////                    countList.get(i).setCount(0);
-//
-////                    countList.get(i).setValue(0);
-//                }
-//                else if(countList.get(i).getCount() - countList.get(i).getValue() > 6){
-//                    countList.get(i).setStatus(false);
-//                    countList.get(i).setValue(0);
-//                    countList.get(i).setCount(0);
-//
-//                }
-//            }
-//        }
+        ArrayList desSud = new ArrayList();
+
+
         for (int i = 0; i < countList.size(); i++) {
             if (countList.get(i).getName().equals(name)) {
-//                System.out.println(System.currentTimeMillis());
-//                System.out.println(countList.get(i).getUpdatedTime());
+//
 
                 if (System.currentTimeMillis() - countList.get(i).getUpdatedTime() >= 18000) {
 //                    System.out.println("System.currentTimeMillis() - countList.get(i).getUpdatedTime() " + (System.currentTimeMillis() - countList.get(i).getUpdatedTime()));
                     for (int j = 0; j < routerModel.getRoutingTableModels().size(); ) {
                         if (routerModel.getRoutingTableModels().get(j).getNext_router().equals(name)) {
+//                            System.out.println("2222222222222222222222222222");
+
+
+                            desSud.add(routerModel.getRoutingTableModels().get(j).getDest_sub());
+
+
 
                             routerModel.getRoutingTableModels().remove(j);
+//                            routerService.tellNeighborToHaveUpdate(routerModel);
+//                            System.out.println(      "333333333");
+
 
                         } else {
                             j++;
                         }
                     }
+
+
+
+                    routingTable.printRouterModel(routerModel);
+//                    routerService.tellNeighborToHaveUpdate(routerModel);
+
+
+                    for (int p = 0; p < routerModel.getNeighbors().size(); p++){
+                        for (int k = 0 ; k < desSud.size(); k++){
+//                            System.out.println("5555555");
+
+                            socketClient.myNeighborDisconnect(routerModel.getNeighbors().get(p),desSud.get(k).toString(), routerModel.getName());
+
+                        }
+
+                    }
+
+
+
                 }
+
             }
         }
-        routerService.tellNeighborToHaveUpdate(routerModel);
-        routingTable.printRouterModel(routerModel);
+
 
 
     }

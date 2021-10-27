@@ -41,18 +41,18 @@ public class RoutingTable {
         System.out.printf("|                    %-41s|\n", "Routing Table in " + routerName);
         System.out.println("|   destination subnet   |   next router   |   hops to dest   |");
         for (int i = 0; i < router.size(); i++) {
-            System.out.printf("|       %-17s|       %-14s|         %-9s|\n", router.get(i).getDest_sub(), router.get(i).getNext_router(), router.get(i).getHops_to_dest());
+            System.out.printf("|       %-17s|       %-14s|          %-10s|\n", router.get(i).getDest_sub(), router.get(i).getNext_router(), router.get(i).getHops_to_dest());
         }
 
     }
 
     public void printRouterModel(RouterModel routerModel) {
-        System.out.printf("|                %-49s|\n", "Routing Table in " + routerModel.getName() + " (Port : " + routerModel.getPort() + ")");
-        System.out.println("|   destination subnet   |      next router    |   hops to dest   |   next router status   |");
+        System.out.printf("|                 %-49s|\n", "Routing Table in " + routerModel.getName() + " (Port : " + routerModel.getPort() + ")");
+        System.out.println("|   destination subnet   |      next router    |   hops to dest    |   next router status   |");
 
         for (int j = 0; j < routerModel.getRoutingTableModels().size(); j++) {
 
-            System.out.printf("|       %-17s|       %-14s|         %-9s|      %-16s|\n", routerModel.getRoutingTableModels().get(j).getDest_sub(), routerModel.getRoutingTableModels().get(j).getNext_router(),
+            System.out.printf("|       %-17s|       %-14s|         %-10s|        %-16s|\n", routerModel.getRoutingTableModels().get(j).getDest_sub(), routerModel.getRoutingTableModels().get(j).getNext_router(),
                     routerModel.getRoutingTableModels().get(j).getHops_to_dest(),routerModel.getRoutingTableModels().get(j).getNext_router_state());
         }
         System.out.println("");
