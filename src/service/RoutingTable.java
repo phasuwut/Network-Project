@@ -22,7 +22,7 @@ public class RoutingTable {
 
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                RoutingTableModel routingTableModel = new RoutingTableModel(data.split(":")[0], data.split(":")[1], data.split(":")[2]);
+                RoutingTableModel routingTableModel = new RoutingTableModel(data.split(":")[0], data.split(":")[1], data.split(":")[2],"-");
                 router.add(routingTableModel);
 
             }
@@ -48,12 +48,12 @@ public class RoutingTable {
 
     public void printRouterModel(RouterModel routerModel) {
         System.out.printf("|                %-49s|\n", "Routing Table in " + routerModel.getName() + " (Port : " + routerModel.getPort() + ")");
-        System.out.println("|   destination subnet   |      next router    |   hops to dest   |");
+        System.out.println("|   destination subnet   |      next router    |   hops to dest   |   next router status   |");
 
         for (int j = 0; j < routerModel.getRoutingTableModels().size(); j++) {
 
-            System.out.printf("|       %-17s|       %-14s|         %-9s|\n", routerModel.getRoutingTableModels().get(j).getDest_sub(), routerModel.getRoutingTableModels().get(j).getNext_router(),
-                    routerModel.getRoutingTableModels().get(j).getHops_to_dest());
+            System.out.printf("|       %-17s|       %-14s|         %-9s|      %-16s|\n", routerModel.getRoutingTableModels().get(j).getDest_sub(), routerModel.getRoutingTableModels().get(j).getNext_router(),
+                    routerModel.getRoutingTableModels().get(j).getHops_to_dest(),routerModel.getRoutingTableModels().get(j).getNext_router_state());
         }
         System.out.println("");
 //        System.out.println("Neighbor's " + routerModel.getName());
@@ -94,10 +94,6 @@ public class RoutingTable {
 
     }
 
-    public List<RouterModel> deleteRouter(List<RouterModel> routerList, List<RoutingTableModel> router, String filename) {
-//        routerList.createdRoutingTable
-        return routerList;
-    }
 
     public Boolean compare(List<RoutingTableModel> routingTableModel_old, List<RoutingTableModel> routingTableModel_new){
 //        System.out.println("routingTableModel_old " + routingTableModel_old.toString());

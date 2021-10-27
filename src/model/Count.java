@@ -1,14 +1,12 @@
 package model;
 
+import java.util.Timer;
+
 public class Count {
 
     private String name;
 
-    private Integer value;
-
-    private Integer count;
-
-    private Boolean status;
+    private Long updatedTime;
 
     public String getName() {
         return name;
@@ -18,39 +16,16 @@ public class Count {
         this.name = name;
     }
 
-    public Integer getValue() {
-        return value;
+    public Long getUpdatedTime() {
+        return updatedTime;
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
+    public void setUpdatedTime(long updatedTime) {
+        this.updatedTime = updatedTime;
     }
 
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
-    public Count(String name, Integer value, Integer count, Boolean status) {
+    public Count(String name, Long updatedTime) {
         this.name = name;
-        this.value = value;
-        this.count = count;
-        this.status = status;
-    }
-
-    @Override
-    public String toString() {
-        return "[name = " + name + ", value =" + value + ", count =" + count + ", status = " +status +" ]";
+        this.updatedTime = updatedTime;
     }
 }

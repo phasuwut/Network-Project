@@ -52,24 +52,47 @@ public class NeighborService {
     }
 
 
-    public void checkStatusNeighbors( List<Count> countList,String name){
-        System.out.println(name + "nameeiei");
-        for(int i = 0 ; i < countList.size(); i++){
-            if(countList.get(i).getName().equals(name)){
-                if (countList.get(i).getValue() == countList.get(i).getCount()){ // เพื่อนบ้านยังไม่ตาย
-                    countList.get(i).setStatus(true); //
-//                    countList.get(i).setCount(0);
+    public void checkStatusNeighbors(RouterModel routerModel, List<Count> countList, String name) {
+        RoutingTable routingTable = new RoutingTable();
+        RouterService routerService = new RouterService();
 
+//        for(int i = 0 ; i < countList.size(); i++){
+//            if(countList.get(i).getName().equals(name)){
+//                if (countList.get(i).getValue() == countList.get(i).getCount()){ // เพื่อนบ้านยังไม่ตาย
+//                    countList.get(i).setStatus(true); //
+////                    countList.get(i).setCount(0);
+//
+////                    countList.get(i).setValue(0);
+//                }
+//                else if(countList.get(i).getCount() - countList.get(i).getValue() > 6){
+//                    countList.get(i).setStatus(false);
 //                    countList.get(i).setValue(0);
-                }
-                else if(countList.get(i).getCount() - countList.get(i).getValue() > 6){
-                    countList.get(i).setStatus(false);
-                    countList.get(i).setValue(0);
-                    countList.get(i).setCount(0);
+//                    countList.get(i).setCount(0);
+//
+//                }
+//            }
+//        }
+        for (int i = 0; i < countList.size(); i++) {
+            if (countList.get(i).getName().equals(name)) {
+//                System.out.println(System.currentTimeMillis());
+//                System.out.println(countList.get(i).getUpdatedTime());
 
+                if (System.currentTimeMillis() - countList.get(i).getUpdatedTime() >= 18000) {
+//                    System.out.println("System.currentTimeMillis() - countList.get(i).getUpdatedTime() " + (System.currentTimeMillis() - countList.get(i).getUpdatedTime()));
+                    for (int j = 0; j < routerModel.getRoutingTableModels().size(); ) {
+                        if (routerModel.getRoutingTableModels().get(j).getNext_router().equals(name)) {
+
+                            routerModel.getRoutingTableModels().remove(j);
+
+                        } else {
+                            j++;
+                        }
+                    }
                 }
             }
         }
+        routerService.tellNeighborToHaveUpdate(routerModel);
+        routingTable.printRouterModel(routerModel);
 
 
     }
