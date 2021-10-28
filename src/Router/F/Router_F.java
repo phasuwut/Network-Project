@@ -52,7 +52,7 @@ public class Router_F {
 
             }
 
-        }, 0, 3000);
+        }, 0, 30000);
 
         // check neighbor every 180 sec
         myTimer.schedule(new TimerTask() {

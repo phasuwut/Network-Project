@@ -141,74 +141,76 @@ public class Socket_RIP_Server {
                         }
                     }
                 }
-                else{ // update status
-                    System.out.println(message);
-                    routingTable.printRouterModel(routerModel);
+                else { // update status
+                    if(message.startsWith("Hello")) {
+                        System.out.println(message);
+                        routingTable.printRouterModel(routerModel);
 
-                    for(int i = 0; i < routerModel.getNeighbors().size(); i++){
-                        if(routerModel.getNeighbors().get(i).getName().equals(message.split("from ")[1])){
-                            for(int j = 0; j < countList.size(); j++){
+                        for (int i = 0; i < routerModel.getNeighbors().size(); i++) {
+                            if (routerModel.getNeighbors().get(i).getName().equals(message.split("from ")[1])) {
+                                for (int j = 0; j < countList.size(); j++) {
 
 
-                                if(countList.get(j).getName().equals(message.split("from ")[1])){
+                                    if (countList.get(j).getName().equals(message.split("from ")[1])) {
 
-//                                    if(countList.get(j).getValue() >= 0){
                                         countList.get(i).setUpdatedTime(System.currentTimeMillis());
+
+                                        // check 180 sec
                                         Timer myTimer = new Timer();
-                    myTimer.schedule(new TimerTask() {
-                        NeighborService neighborService = new NeighborService();
-                        public void run() {
+                                        myTimer.schedule(new TimerTask() {
+                                            NeighborService neighborService = new NeighborService();
 
-                            String name = message.split("from ")[1];
+                                            public void run() {
 
-                            System.out.println("-------------------" + name + "---------------------");
-                            neighborService.checkStatusNeighbors(routerModel, countList, name);
-                        }
+                                                String name = message.split("from ")[1];
 
-                    }, 18000);
+                                                System.out.println("-------------------" + name + "---------------------");
+                                                neighborService.checkStatusNeighbors(routerModel, countList, name);
+                                            }
 
-//                                        countList.get(j).setStatus(true);
-//                                        countList.get(j).setCount(1);
-//                                    }
+                                        }, 18000);
+
+
+
+
+                                    }
 
 
                                 }
-
-
-
                             }
                         }
+
+
+
                     }
+                    else if(message.startsWith("Delete")){
+                        System.out.println(message);
+
+                        for (int i = 0; i < routerModel.getRoutingTableModels().size();){
+//
+                            if(routerModel.getRoutingTableModels().get(i).getNext_router().equals(message.split("from ")[1]) &&
+                                    routerModel.getRoutingTableModels().get(i).getDest_sub().equals(message.split(" from")[0].split("Delete ")[1])  ){
+                                RouterService routerService = new RouterService();
+
+                                routerModel.getRoutingTableModels().remove(i);
+                                System.out.println("removeeeeeee");
+                                System.out.println(routerModel.getRoutingTableModels().toString());
+                                routingTable.printRouterModel(routerModel);
+
+//                                routerService.tellNeighborToHaveUpdate(routerModel);
+
+                            }
+                            else{
+                                i++;
+                            }
+                        }
+//                        routingTable.printRouterModel(routerModel);
 
 
-//                    Timer myTimer = new Timer();
-//
-//                    myTimer.schedule(new TimerTask() {
-//                        NeighborService neighborService = new NeighborService();
-//                        public void run() {
-//
-//                            String name = message.split("from ")[1];
-//
-//                            System.out.println("-------------------" + name + "---------------------");
-//                            neighborService.checkStatusNeighbors(countList,name);
-//                            System.out.println(countList.toString());
-//                        }
-//
-//                    }, 18000,18000);
-
+                    }
                 }
 
 
-
-//                new Timer().schedule(new NewCheckNeighbor(), 0, 1000);
-//
-//                for (int i = 0; i < 3; i++) {
-//                    Thread.sleep(1000);
-//                }
-
-//                System.out.println(listOfMessages.toString());
-
-//                routingTable.printRoutingTable(listOfMessages,routerName);
 
 
 

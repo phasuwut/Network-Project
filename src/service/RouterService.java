@@ -26,11 +26,8 @@ public class RouterService {
     public void updateForwarding(List<RoutingTableModel> router, String dest_subnet, String next_router, String hop_to_dest, String next_router_status) {
         for (int i = 0; i < router.size(); i++) {
 
-//            System.out.println("next_router_status" + next_router_status);
             if (router.get(i).getDest_sub().equals(dest_subnet)) {
 
-//                if (next_router_status.equals("connected")) {
-//                        System.out.println("*******************");
 
                         if (parseInt(router.get(i).getHops_to_dest()) > 1 + parseInt(hop_to_dest)) {
                             router.get(i).setNext_router(next_router);
@@ -38,58 +35,10 @@ public class RouterService {
                         }
                     }
 
-//                 else if (next_router_status.equals("disconnected")) {
-////                        System.out.println("=======================");
-//                        router.get(i).setNext_router(next_router);
-//                        router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
-//                    }
-//                }
-//            }
         }
-//                 count to infinity
-//                router.get(i).setNext_router(next_router);
-//                router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
-
-
-//                else if (parseInt(hop_to_dest) < parseInt(router.get(i).getHops_to_dest())) {
-//                    router.get(i).setNext_router(next_router);
-//                    router.get(i).setHops_to_dest(String.valueOf(parseInt(hop_to_dest)));
-//                }
-
-//            }
-//
-//            router.get(router.indexOf(dest_subnet)).setNext_router(next_router);
-//            router.get(router.indexOf(dest_subnet)).setHops_to_dest(hop_to_dest);
-//        }
-//        System.out.println(router);
 
     }
 
-    public List<RoutingTableModel> updateRoutingTable(List<RoutingTableModel> router, List<Neighbor> routerNeighbors) {
-
-        for (int i = 0; i < routerNeighbors.size(); i++) {
-            for (int j = 0; j < routerNeighbors.get(i).getRoutingTableModel().size(); j++) {
-
-                if (haveDest(router, routerNeighbors.get(i).getRoutingTableModel().get(j).getDest_sub())  ) {
-                    updateForwarding(router, routerNeighbors.get(i).getRoutingTableModel().get(j).getDest_sub(),
-                            routerNeighbors.get(i).getName().split(" ")[1],
-                            routerNeighbors.get(i).getRoutingTableModel().get(j).getHops_to_dest(),
-                            routerNeighbors.get(i).getRoutingTableModel().get(j).getNext_router_state());
-
-
-                } else {
-//                        System.out.println(routerNeighbors.get(i).getName().split(" ")[1]);
-//                        System.out.println(parseInt(routerNeighbors.get(i).getRoutingTableModel().get(j).getHops_to_dest()));
-
-                    addForwarding(router, routerNeighbors.get(i).getRoutingTableModel().get(j).getDest_sub(),
-                            routerNeighbors.get(i).getName().split(" ")[1],
-                            String.valueOf(parseInt(routerNeighbors.get(i).getRoutingTableModel().get(j).getHops_to_dest()) + 1), "online");
-                }
-            }
-        }
-
-        return router;
-    }
 
 
     public Boolean haveDest(List<RoutingTableModel> router, String dest_subnet) {
@@ -103,17 +52,7 @@ public class RouterService {
 
     }
 
-    public void updateNeighborRoutingTable(List<RouterModel> routerList, RouterModel routerModel) {
-        for (int i = 0; i < routerList.size(); i++) {
-            for (int j = 0; j < routerList.get(i).getNeighbors().size(); j++) {
-                if (routerList.get(i).getNeighbors().get(j).getName().equals(routerModel.getName())) { // ถ้าใครมีเพื่อนบ้านที่ update table
-                    routerList.get(i).getNeighbors().get(j).setRoutingTableModel(routerModel.getRoutingTableModels());
-                    updateRoutingTable(routerList.get(i).getRoutingTableModels(), routerList.get(i).getNeighbors());
-                }
 
-            }
-        }
-    }
 
     //
     public void tellNeighborToHaveUpdate(RouterModel routerModel) {
@@ -124,33 +63,10 @@ public class RouterService {
         }
     }
 
-    public void getCompletedRoutingTable(List<RouterModel> routerList) {
-        for (int i = 0; i < routerList.size(); i++) {
-            this.updateRoutingTable(routerList.get(i).getRoutingTableModels(), routerList.get(i).getNeighbors());
-            this.updateNeighborRoutingTable(routerList, routerList.get(i));
-        }
-    }
 
-    public void deletedRouter(List<RouterModel> routerList, String routerName) {
-        for (int i = 0; i < routerList.size(); i++) {
-            for (int j = 0; j < routerList.get(i).getNeighbors().size(); j++) {
-                if (routerList.get(i).getNeighbors().get(j).getName().equals(routerName)) {
-                    routerList.get(i).getNeighbors().remove(j);
-                }
 
-            }
-            if (routerList.get(i).getName().equals(routerName)) {
 
-                routerList.remove(i);
-            }
-        }
 
-//        this.getCompletedRoutingTable(routerList);
-    }
-
-    public void deletedRouter() {
-
-    }
 
     public RouterModel getRouter_A() {
         RoutingTable routingTable = new RoutingTable();
@@ -235,7 +151,6 @@ public class RouterService {
 
     public List<RoutingTableModel> updateRoutingTableWhenNeighborOnline(List<RoutingTableModel> routingTableModel, List<RoutingTableModel> routingTableModel_neighbor, String neighborName) {
 
-//        for (int i = 0; i < routingTableModel_neighbor.size(); i++) {
         for (int i = 0; i < routingTableModel_neighbor.size(); i++) {
 
             if (checkHaveDest(routingTableModel, routingTableModel_neighbor.get(i).getDest_sub())) {
@@ -244,21 +159,16 @@ public class RouterService {
 
 
             } else {
-//                        System.out.println(routerNeighbors.get(i).getName().split(" ")[1]);
-//                        System.out.println(parseInt(routerNeighbors.get(i).getRoutingTableModel().get(j).getHops_to_dest()));
 
                 addForwarding(routingTableModel, routingTableModel_neighbor.get(i).getDest_sub(),
                         neighborName,
                         String.valueOf(parseInt(routingTableModel_neighbor.get(i).getHops_to_dest()) + 1), "connected");
             }
         }
-//        }
 
         return routingTableModel;
     }
-//    public List<RoutingTableModel> updateRoutingTableWhenNeighborOnline(List<RoutingTableModel> routingTableModel, List<RoutingTableModel> routingTableModel_neighbor, String neighborName) {
 
-//    updateRoutingTableWhenNeighborDisconnected
 
     public Boolean checkHaveDest(List<RoutingTableModel> routingTableModel, String dest_subnet) {
 
@@ -273,10 +183,79 @@ public class RouterService {
 
 
 
+//    public void updateForwardingCount(List<RoutingTableModel> router, String dest_subnet, String next_router, String hop_to_dest, String next_router_status) {
+//        for (int i = 0; i < router.size(); i++) {
 //
-//    public List<RoutingTableModel> updateNeighborRoutingTableWhenRoutingTableChange(){
+//            if (router.get(i).getDest_sub().equals(dest_subnet)) {
+//                 router.get(i).setNext_router(next_router);
+//                    router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
+//
+//            }
+//        }
+//
 //
 //    }
+
+    public Boolean checkHaveDestWhenNeighborDisconnect(List<RoutingTableModel> routingTableModel, String dest_subnet) {
+
+        for (int i = 0; i < routingTableModel.size(); i++) {
+            if (routingTableModel.get(i).getDest_sub().equals(dest_subnet)) {
+//                routingTableModel.get(i).getNext_router_state().equals("connected");
+//) && !routingTableModel.get(i).getNext_router().equals("-") &&
+//                        routingTableModel.get(i).getNext_router_state().equals("disconnected"))
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public void tellNeighborWhenMyNeighborDisconnect(RouterModel routerModel) {
+        for (int i = 0; i < routerModel.getNeighbors().size(); i++) {
+
+            Socket_RIP_Client socket_RIP_client = new Socket_RIP_Client();
+            socket_RIP_client.sendToServer(routerModel.getNeighbors().get(i), routerModel);
+        }
+    }
+
+//    public List<RoutingTableModel> updateRoutingTableWhenNeighborDisconnected( List<Neighbor> neighbors, List<RoutingTableModel> routingTableModel, String neighborDisconnectName) {
+        public List<RoutingTableModel> updateRoutingTableWhenNeighborDisconnected(List<RoutingTableModel> routingTableModel, List<RoutingTableModel> routingTableModel_neighbor, String neighborName) {
+
+            for (int i = 0; i < routingTableModel_neighbor.size(); i++) {
+
+                if (checkHaveDest(routingTableModel, routingTableModel_neighbor.get(i).getDest_sub())) {
+                    updateForwardingCount(routingTableModel, routingTableModel_neighbor.get(i).getDest_sub(),
+                            routingTableModel_neighbor.get(i).getNext_router()
+                            , routingTableModel_neighbor.get(i).getHops_to_dest()
+                            , routingTableModel_neighbor.get(i).getNext_router_state());
+
+
+                } else {
+
+                    addForwarding(routingTableModel, routingTableModel_neighbor.get(i).getDest_sub(),
+                            neighborName,
+                            String.valueOf(parseInt(routingTableModel_neighbor.get(i).getHops_to_dest()) + 1), "connected");
+                }
+            }
+
+            return routingTableModel;
+    }
+
+    public void updateForwardingWhenNeighborDisconnected(List<RoutingTableModel> router, String dest_subnet, String next_router, String hop_to_dest, String next_router_status) {
+        for (int i = 0; i < router.size(); i++) {
+
+            if (router.get(i).getDest_sub().equals(dest_subnet)) {
+
+
+//                if (parseInt(router.get(i).getHops_to_dest()) > 1 + parseInt(hop_to_dest)) {
+                    router.get(i).setNext_router(next_router);
+                    router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
+//                }
+            }
+
+        }
+
+    }
 
     public List<RoutingTableModel> updateRoutingTableWhenNeighborDisconnect(List<RoutingTableModel> routingTableModel, String neighborDisconnectedName, List<Neighbor> neighbors) {
 
@@ -313,29 +292,13 @@ public class RouterService {
             if (router.get(i).getDest_sub().equals(dest_subnet)) {
 
 //                        System.out.println("=======================");
-                    router.get(i).setNext_router(next_router);
-                    router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
+                router.get(i).setNext_router(next_router);
+                router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
 
             }
 //            }
         }
-//                 count to infinity
-//                router.get(i).setNext_router(next_router);
-//                router.get(i).setHops_to_dest(String.valueOf(1 + parseInt(hop_to_dest)));
-
-
-//                else if (parseInt(hop_to_dest) < parseInt(router.get(i).getHops_to_dest())) {
-//                    router.get(i).setNext_router(next_router);
-//                    router.get(i).setHops_to_dest(String.valueOf(parseInt(hop_to_dest)));
-//                }
-
-//            }
-//
-//            router.get(router.indexOf(dest_subnet)).setNext_router(next_router);
-//            router.get(router.indexOf(dest_subnet)).setHops_to_dest(hop_to_dest);
-//        }
-//        System.out.println(router);
-
     }
+
 
 }
